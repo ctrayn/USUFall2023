@@ -1,17 +1,24 @@
 SOURCES+=$(wildcard *.cpp)
 
+INCLUDES+=-I.
+
 CFLAGS+=-Wall
+CFLAGS+=$(INCLUDES)
+
 LDFLAGS+=-Wall
 
 EXECUTABLE=homework0
 
-OBJECTS=$(SOURCES.c=.0)
-
+OBJECTS:=$(SOURCES:.c=.o)
 CC=g++
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) -c $(SOURCES)
-	$(CC) -o $(EXECUTABLE) $(LDFLAGS) */.o
+	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
 
 .c.o: $(SOURCES)
-	$(CC) $(CFLAGS) $? -c $<
+	$(CC) $(CFLAGS) $(INCLUDES) -c $? -o $@
+
+.PHONY:clean
+clean:
+	rm -f *.0
+	rm -f $(EXECUTABLE)

@@ -4,6 +4,7 @@
 class node_t {
     public:
     int value;
+    int height;
     node_t* right;
     node_t* left;
 };

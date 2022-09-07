@@ -7,18 +7,21 @@ CFLAGS+=$(INCLUDES)
 
 LDFLAGS+=-Wall
 
-EXECUTABLE=homework0
+EXECUTABLE:=homework0
 
-OBJECTS:=$(SOURCES:.c=.o)
-CC=g++
+OBJECTS:=$(SOURCES:.cpp=.o)
+CC:=g++
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
+$(EXECUTABLE): $(SOURCES)
+	$(CC) $(CFLAGS) -o $(EXECUTABLE) $(SOURCES)
+#	$(CC) -c $(SOURCES)
+#	$(CC) ./*.o -o $(EXECUTABLE)
+#	$(CC) $(OBJECTS) $(LDFLAGS) -o $(EXECUTABLE)
 
-.c.o: $(SOURCES)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $? -o $@
+#.cpp.o: $(SOURCES)
+#	$(CC) $(CFLAGS) $(INCLUDES) -c $<
 
 .PHONY:clean
 clean:
-	rm -f *.0
+	rm -f *.o
 	rm -f $(EXECUTABLE)

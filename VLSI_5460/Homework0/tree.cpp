@@ -30,7 +30,7 @@ void TREE::insert_node(int value) {
 }
 
 void TREE::insert_node_helper(node_t* node, int value) {
-    cout << "insertnodehelpert node " << node->value << " value " << value << endl;
+    // cout << "insertnodehelpert node " << node->value << " value " << value << endl;
     if (node->value == value) {
         write("Value already in tree: '" + to_string(value) + "' ");
         return;
@@ -278,7 +278,7 @@ void TREE::traverse_pre() {
         traverse_pre_helper(Root, "");
     }
     else {
-        write("No nodes in tree");
+        write("No nodes in tree\n");
     }
 }
 
@@ -302,7 +302,7 @@ void TREE::traverse_in() {
         traverse_in_helper(Root, "");
     }
     else {
-        write("No nodes in tree");
+        write("No nodes in tree\n");
     }
 }
 
@@ -322,7 +322,12 @@ void TREE::traverse_in_helper(node_t* node, string tabs) {
 }
 
 void TREE::traverse_post() {
-    traverse_post_helper(Root, "");
+    if (Root != nullptr) {
+        traverse_post_helper(Root, "");
+    }
+    else {
+        write("No nodes in tree\n");
+    }
 }
 
 void TREE::traverse_post_helper(node_t* node, string tabs) {
@@ -340,32 +345,32 @@ void TREE::traverse_post_helper(node_t* node, string tabs) {
     write(tabs + to_string(node->value) + '\n');
 }
 
-node_t* TREE::rotate_right(node_t* y) {
-    node_t* x = y->left;
-    node_t* sub_x = x->right;
+void TREE::rotate_right(node_t* node) {
+    cout << "rotate right" << endl;
+    // node_t* y = node;
+    node_t* x = node->left;
+    // node_t* x_r = node->left->right;
 
-    //Do the rotation
-    x->right = y;
-    y->left = sub_x;
-
-    //Update heights
-    y->height = max(get_height(y->right), get_height(y->left)) + 1;
-    x->height = max(get_height(x->right), get_height(x->left)) + 1;
-
-    return x;
+    node->left = node->left->right;
+    x->right = node;
+    node = x;
+    cout << "rotate right end" << endl;
+    reset_heights(node);
+    cout << "Node value" << node->value << endl;
 }
 
-node_t* TREE::rotate_left(node_t* y) {
-    node_t* x = y->right;
-    node_t* sub_x = x->left;
+void TREE::rotate_left(node_t* node) {
+    cout << "rotate left" << endl;
+    // node_t* x = node;
+    node_t* y = node->right;
+    // node_t* y_l = node->right->left;
 
-    x->left = y;
-    y->right = sub_x;
-
-    y->height = max(get_height(y->right), get_height(y->left)) + 1;
-    x->height = max(get_height(x->right), get_height(x->left)) + 1;
-
-    return x;
+    node->right = node->right->left;
+    y->left = node;
+    node = y;
+    cout << "rotate left end" << endl;
+    reset_heights(node);
+    cout << "Node value" << node->value << endl;
 }
 
 node_t* TREE::get_node(node_t* node, int value) {
@@ -427,7 +432,7 @@ void TREE::reset_heights(node_t* node) {
 
 void TREE::rebalance() {
     reset_heights(Root);
-    rebalance_helper(Root);
+    // rebalance_helper(Root);
 }
 
 void TREE::rebalance_helper(node_t* node) {

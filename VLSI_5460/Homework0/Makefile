@@ -4,22 +4,14 @@ INCLUDES+=-I.
 
 CFLAGS+=-Wall
 CFLAGS+=$(INCLUDES)
-
-LDFLAGS+=-Wall
+CFLAGS+=-g
 
 EXECUTABLE:=homework0
 
-OBJECTS:=$(SOURCES:.cpp=.o)
 CC:=g++
 
 $(EXECUTABLE): $(SOURCES)
 	$(CC) $(CFLAGS) -o $(EXECUTABLE) $(SOURCES)
-#	$(CC) -c $(SOURCES)
-#	$(CC) ./*.o -o $(EXECUTABLE)
-#	$(CC) $(OBJECTS) $(LDFLAGS) -o $(EXECUTABLE)
-
-#.cpp.o: $(SOURCES)
-#	$(CC) $(CFLAGS) $(INCLUDES) -c $<
 
 .PHONY:clean
 clean:

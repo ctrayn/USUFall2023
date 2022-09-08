@@ -1,3 +1,0 @@
-Create Tree: 84 87 78 16 94 36 Value already in tree: '87' 93 50 22 63 28 91 60 64 
-84
- 64

@@ -27,8 +27,8 @@ class TREE {
         void rebalance();
         void rebalance_helper(node_t* node);
         node_t* get_node(node_t* node, int value);
-        node_t* rotate_right(node_t* y);
-        node_t* rotate_left(node_t* y);
+        void rotate_right(node_t* y);
+        void rotate_left(node_t* y);
 
         void reset_heights(node_t* node);
         int get_height(node_t* node);

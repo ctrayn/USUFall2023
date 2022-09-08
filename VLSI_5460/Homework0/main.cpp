@@ -74,6 +74,7 @@ int main() {
                         while (std::getline(in_file, line)) {
                             try {
                                 // write("Inserting node " + line);
+                                cout << endl << endl << "****************" << endl << endl;
                                 tree.insert_node(stoi(line));
                             }
                             catch(std::invalid_argument& e) {
@@ -87,7 +88,7 @@ int main() {
                         tree.traverse_pre();
                     }
                     else {
-                        write("Couldn't open file: " + value);
+                        write("Couldn't open file: " + value + "\n");
                     }
                 }
                 break;
@@ -140,6 +141,7 @@ int main() {
                 else if (value == "in") {   //In_order
                     tree.traverse_in();
                 }
+                break;
 
             case '6':
                 write("Delete Tree:");

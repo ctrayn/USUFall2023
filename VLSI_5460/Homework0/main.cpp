@@ -15,24 +15,25 @@ using namespace std;
 ofstream out_file;
 
 void print_menu() {
-    write("Choose a number from the following options, followed by any arguments:");
-    write("\t(1) Create_Tree");
-    write("\t(2) Insertion");
-    write("\t(3) Deletion");
-    write("\t(4) Search");
-    write("\t(5) Traversal");
-    write("\t(6) Delete_Tree");
-    write("\t(7) Check_Balance");
+    cout << "Choose a number from the following options, followed by any arguments:" << endl;
+    cout << "\t(1) Create_Tree" << endl;
+    cout << "\t(2) Insertion" << endl;
+    cout << "\t(3) Deletion" << endl;
+    cout << "\t(4) Search" << endl;
+    cout << "\t(5) Traversal" << endl;
+    cout << "\t(6) Delete_Tree" << endl;
+    cout << "\t(7) Check_Balance" << endl;
+    cout << "\t(q) Quit" << endl;
 }
 
 void print_prompt() {
-    write("tree $");
+    cout << "tree $";
 }
 
 void print_help() {
-    write("Please enter choices in the following manner");
-    write("\t<option number> <arguments>");
-    write("\tie: 1 input.txt");
+    cout << "Please enter choices in the following manner" << endl;
+    cout << "\t<option number> <arguments>" << endl;
+    cout << "\tie: 1 input.txt" << endl;
 }
 
 int main() {
@@ -42,39 +43,48 @@ int main() {
     string line;
     ifstream in_file;
     TREE tree;
-    int num;
 
     out_file.open("output.txt");
+    print_menu();
 
     while (true) {
-        print_menu();
         print_prompt();
         std::getline(cin, selection);
         key = selection[0];
-        value = selection.substr(selection.find(' ') + 1);
-        write("Got input: " + selection + " key: " + key + " value: " + value);
+
+        if (selection.find(' ') == string::npos) {
+            value = "";
+        }
+        else {
+            value = selection.substr(selection.find(' ') + 1);
+        }
 
         switch(key) {
             case '1':   // Create Tree
-                write("Create Tree");
                 if (value == "") {
-                    write("Please list the input file");
+                    cout << "Please list the input file" << endl;
                 }
                 else {
                     in_file.open(value);
-                    write("Opening file");
+                    // write("Opening file");
                     if (in_file.is_open()) {
-                        write("File is open");
+                        // write("File is open");
+                        write("Create Tree: ");
                         tree = TREE();
                         while (std::getline(in_file, line)) {
                             try {
-                                write("Inserting node " + line);
+                                // write("Inserting node " + line);
                                 tree.insert_node(stoi(line));
                             }
                             catch(std::invalid_argument& e) {
+                                write("\nError: ");
                                 write(e.what());
+                                write(" with value : " + line + "\n");
                             }
                         }
+                        in_file.close();
+                        write("\n");
+                        tree.traverse_pre();
                     }
                     else {
                         write("Couldn't open file: " + value);
@@ -82,77 +92,84 @@ int main() {
                 }
                 break;
 
-            case '2':
-                write("Insertion");
+            case '2':   //Insertion
                 try {
-                    write("Inserting node " + value);
-                    tree.insert_node(stoi(value));
+                    write("Insertion: ");
+                    tree.insert_node(stoi(value));  //Try catch to verify that input value is a number
+                    write("\n");
+                    cout << "Pre_order traversal:" << endl;
+                    tree.traverse_pre();
                 }
                 catch(std::invalid_argument& e) {
+                    write("\nError: ");
                     write(e.what());
+                    write(" with value : " + value + "\n");
                 }
                 break;
             
-            case '3':
-                write("Deletion");
+            case '3':   //Deletion
                 try {
-                    tree.delete_node(stoi(value));
+                    tree.delete_node(stoi(value));  //Try catch to verify that input value is a number
+                    tree.traverse_pre();
                 }
                 catch(std::invalid_argument& e) {
+                    write("\nError: ");
                     write(e.what());
+                    write(" with value : " + value + "\n");
                 }
                 break;
 
-            case '4':
-                write("Search");
+            case '4':   //Search
                 try {
-                    tree.find_node(stoi(value));
+                    tree.find_node(stoi(value));    //Try catch to verify that input value is a number
                 }
                 catch(std::invalid_argument& e) {
+                    write("\nError: ");
                     write(e.what());
+                    write(" with value : " + value + "\n");
                 }
                 break;
 
-            case '5':
-                write("Traversal");
-                write("Please choose from the following options");
-                write("\t(1) Pre_order");
-                write("\t(2) Post_order");
-                write("\t(3) In_Order");
-                print_prompt();
-                std::getline(cin, selection);
-                switch(selection[0]) {
-                    case '1':
-                        write("Pre_order");
-                        tree.traverse_pre();
-                        break;
-
-                    case '2':
-                        write("Post_order");
-                        tree.traverse_post();
-                        break;
-
-                    case '3':
-                        write("In_order");
-                        tree.traverse_in();
-                        break;
+            case '5':   //Traversal
+                if (value == "pre"){    //Pre_order
+                    tree.traverse_pre();
                 }
-                break;
+                else if (value == "post") { //Post_order
+                    tree.traverse_post();
+                }
+                else if (value == "in") {   //In_order
+                    tree.traverse_in();
+                }
 
             case '6':
-                write("Delete Tree");
+                write("Delete Tree:");
                 tree = TREE();
+                write(" Tree Deleted");
                 break;
 
             case '7':
-                write("Check Balance");
+                write("Check Balance: ");
+                if (tree.check_balance()) {
+                    write("1\n");
+                }
+                else {
+                    write("0\n");
+                }
+                tree.print_heights();
+                break;
+
+            case 'q':
+                out_file.close();
+                return 0;
                 break;
 
             default:
                 write("Input not recognized: " + selection);
                 print_help();
+                print_menu();
                 break;
         }
+        // write("\n");
     }
 
     return 0;

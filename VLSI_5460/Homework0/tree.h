@@ -20,12 +20,17 @@ class TREE {
         void traverse_post();
         void traverse_in();
 
+        void print_heights();
+
     private:
         node_t* Root;
         void rebalance();
+        void rebalance_helper(node_t* node);
         node_t* get_node(node_t* node, int value);
         node_t* rotate_right(node_t* y);
         node_t* rotate_left(node_t* y);
+
+        void reset_heights(node_t* node);
         int get_height(node_t* node);
 
         void traverse_pre_helper(node_t* node, string tabs);
@@ -34,6 +39,8 @@ class TREE {
         bool check_balance_helper(node_t* node);
         void insert_node_helper(node_t* node, int value);
         void delete_node_helper(node_t* node, int value);
+
+        void print_heights_helper(node_t* node, string tabs);
 };
 
 #endif //TREE_H

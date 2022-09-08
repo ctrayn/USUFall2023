@@ -4,6 +4,8 @@
         "ostream": "cpp",
         "string": "cpp",
         "*.tcc": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "new": "cpp",
+        "stdexcept": "cpp"
     }
 }

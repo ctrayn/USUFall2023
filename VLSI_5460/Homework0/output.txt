@@ -1,0 +1,16 @@
+Create Tree: 84 87 78 16 94 36 Value already in tree: '87' 93 50 22 63 28 91 60 64 
+84 78 16 36 22 28 50 63 60 64 87 94 93 91 
+Insertion: 14 
+84 78 16 14 36 22 28 50 63 60 64 87 94 93 91 
+Delete: 14 success
+84 78 16 36 22 28 50 63 60 64 87 94 93 91 
+Search 14: Not Found
+Post_order: 28 22 60 64 63 50 36 16 78 91 93 94 87 84 
+Pre_order: 84 78 16 36 22 28 50 63 60 64 87 94 93 91 
+In_order: 16 22 28 36 50 60 63 64 78 84 87 91 93 94 
+Delete Tree: Tree Deleted
+Pre_order: No nodes in tree
+
+Create Tree: 84 87 78 16 94 36 Value already in tree: '87' 93 50 22 63 28 91 60 64 
+84 78 16 36 22 28 50 63 60 64 87 94 93 91 
+Check Balance: 0

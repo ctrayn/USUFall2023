@@ -37,6 +37,7 @@ void print_help() {
 }
 
 int main() {
+    /* Set up variables */
     string selection;
     char key;
     string value;
@@ -44,12 +45,16 @@ int main() {
     ifstream in_file;
     TREE tree;
 
+    /* Open the output file as a global variable */
     out_file.open("output.txt");
     print_menu();
 
     while (true) {
+        /* Capture input */
         print_prompt();
         std::getline(cin, selection);
+        
+        /* Parse input */
         key = selection[0];
 
         if (selection.find(' ') == string::npos) {
@@ -59,6 +64,7 @@ int main() {
             value = selection.substr(selection.find(' ') + 1);
         }
 
+        /* Execute commands */
         switch(key) {
             case '1':   // Create Tree
                 if (value == "") {
@@ -74,7 +80,6 @@ int main() {
                         while (std::getline(in_file, line)) {
                             try {
                                 // write("Inserting node " + line);
-                                cout << endl << endl << "****************" << endl << endl;
                                 tree.insert_node(stoi(line));
                             }
                             catch(std::invalid_argument& e) {
@@ -86,6 +91,7 @@ int main() {
                         in_file.close();
                         write("\n");
                         tree.traverse_pre();
+                        write("\n");
                     }
                     else {
                         write("Couldn't open file: " + value + "\n");
@@ -98,8 +104,8 @@ int main() {
                     write("Insertion: ");
                     tree.insert_node(stoi(value));  //Try catch to verify that input value is a number
                     write("\n");
-                    cout << "Pre_order traversal:" << endl;
                     tree.traverse_pre();
+                    write("\n");
                 }
                 catch(std::invalid_argument& e) {
                     write("\nError: ");
@@ -110,8 +116,11 @@ int main() {
             
             case '3':   //Deletion
                 try {
+                    write("Delete " + value);
                     tree.delete_node(stoi(value));  //Try catch to verify that input value is a number
+                    write(": success\n");
                     tree.traverse_pre();
+                    write("\n");
                 }
                 catch(std::invalid_argument& e) {
                     write("\nError: ");
@@ -122,7 +131,13 @@ int main() {
 
             case '4':   //Search
                 try {
-                    tree.find_node(stoi(value));    //Try catch to verify that input value is a number
+                    write("Search " + value);
+                    if(tree.find_node(stoi(value))) {
+                        write(": Found\n");
+                    }
+                    else {
+                        write(": Not Found\n");
+                    }
                 }
                 catch(std::invalid_argument& e) {
                     write("\nError: ");
@@ -133,23 +148,29 @@ int main() {
 
             case '5':   //Traversal
                 if (value == "pre"){    //Pre_order
+                    write("Pre_order: ");
                     tree.traverse_pre();
+                    write("\n");
                 }
                 else if (value == "post") { //Post_order
+                    write("Post_order: ");
                     tree.traverse_post();
+                    write("\n");
                 }
                 else if (value == "in") {   //In_order
+                    write("In_order: ");
                     tree.traverse_in();
+                    write("\n");
                 }
                 break;
 
-            case '6':
+            case '6':   //Delete Tree
                 write("Delete Tree:");
                 tree = TREE();
-                write(" Tree Deleted");
+                write(" Tree Deleted\n");
                 break;
 
-            case '7':
+            case '7':   //Check Balance
                 write("Check Balance: ");
                 if (tree.check_balance()) {
                     write("1\n");
@@ -157,10 +178,9 @@ int main() {
                 else {
                     write("0\n");
                 }
-                tree.print_heights();
                 break;
 
-            case 'q':
+            case 'q':   //Save file and close program
                 out_file.close();
                 return 0;
                 break;

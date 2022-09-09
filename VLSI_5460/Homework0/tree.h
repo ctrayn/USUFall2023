@@ -13,7 +13,7 @@ class TREE {
         void insert_node(int value);
         void delete_node(int value);
         // void delete_node(node_t value);
-        node_t find_node(int value);
+        bool find_node(int value);
         bool check_balance();
 
         void traverse_pre();
@@ -27,8 +27,8 @@ class TREE {
         void rebalance();
         void rebalance_helper(node_t* node);
         node_t* get_node(node_t* node, int value);
-        void rotate_right(node_t* y);
-        void rotate_left(node_t* y);
+        void rotate_right(node_t* node);
+        void rotate_left(node_t* node);
 
         void reset_heights(node_t* node);
         int get_height(node_t* node);

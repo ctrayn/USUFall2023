@@ -18,27 +18,28 @@ TREE::TREE(int value) {
 }
 
 void TREE::insert_node(int value) {
+    /* Root case */
     if (Root == nullptr) {
-        cout << "NULL Root" << endl;
         Root = new node_t {.value = value, .height = 1, .right = nullptr, .left = nullptr};
         write(to_string(value) + ' ');
     }
     else {
         insert_node_helper(Root, value);
     }
+    /* Check balance after every insertion */
     rebalance();
 }
 
 void TREE::insert_node_helper(node_t* node, int value) {
-    // cout << "insertnodehelpert node " << node->value << " value " << value << endl;
+    /* Case already exists */
     if (node->value == value) {
         write("Value already in tree: '" + to_string(value) + "' ");
         return;
     }
+    /* Case right */
     else if (value > node->value) {
-        cout << "Right" << endl;
+        /* Found the place for the new node */
         if (node->right == nullptr) {
-            cout << "new" << endl;
             write(to_string(value) + ' ');
             node->right = new node_t;
             node->right->value = value;
@@ -46,14 +47,15 @@ void TREE::insert_node_helper(node_t* node, int value) {
             node->right->right = nullptr;
             node->right->left = nullptr;
         }
+        /* Try again on the right child */
         else {
             return insert_node_helper(node->right, value);
         }
     }
+    /* Case left */
     else  { //value < node->value
-        cout << "Left" << endl;
+        /* Found the place for the new node */
         if (node->left == nullptr) {
-            cout << "new" << endl;
             write(to_string(value) + ' ');
             node->left = new node_t;
             node->left->value = value;
@@ -61,6 +63,7 @@ void TREE::insert_node_helper(node_t* node, int value) {
             node->left->right = nullptr;
             node->left->left = nullptr;
         }
+        /* Try again on the left child */
         else {
             return insert_node_helper(node->left, value);
         }
@@ -68,9 +71,10 @@ void TREE::insert_node_helper(node_t* node, int value) {
 }
 
 void TREE::delete_node(int value) {
-    //Root case
+    /* Root case */
     if (Root->value == value) {
         if (Root->left != nullptr) {
+            /* The left right node is blank, take the left node value */
             if (Root->left->right == nullptr) {
                 if (Root->left->left != nullptr) {
                     Root->value = Root->left->left->value;
@@ -83,6 +87,7 @@ void TREE::delete_node(int value) {
                     Root->left = nullptr;
                 }
             }
+            /* Get the next biggest number */
             else {
                 node_t* current = Root->left;
                 while (current->right->right != nullptr) {
@@ -94,6 +99,7 @@ void TREE::delete_node(int value) {
             }
         }
         else if (Root->right != NULL) {
+            /* The right left node is blank take the right node value */
             if (Root->right->left == nullptr) {
                 if (Root->right->right != nullptr) {
                     Root->value = Root->right->right->value;
@@ -106,6 +112,7 @@ void TREE::delete_node(int value) {
                     Root->right = nullptr;
                 }
             }
+            /* Get the next smallest number */
             else {
                 node_t* current = Root->right;
                 while (current->left->left != nullptr) {
@@ -121,8 +128,12 @@ void TREE::delete_node(int value) {
             Root = nullptr;
         }
     }
+    /* Not the root, recurse until found */
+    else {
+        delete_node_helper(Root, value);
+    }
 
-    delete_node_helper(Root, value);
+    /* Should be balanced, but just as a precaution */
     rebalance();
 }
 
@@ -134,10 +145,10 @@ void TREE::delete_node_helper(node_t* node, int value) {
         return;
     }
 
+    /* Right See Root Comments as well*/
     if (value > node->value) {
-        //Right
         if (node->right == nullptr) {
-            write("Couldn't delete value: " + to_string(value));
+            write("1Couldn't delete value: " + to_string(value));
             return;
         }
         if (node->right->value == value) {
@@ -186,10 +197,10 @@ void TREE::delete_node_helper(node_t* node, int value) {
             delete_node_helper(node->right, value);
         }
     }
+    /* Left, see Root comments as well*/
     else { //value < node->value
-        //Left
         if (node->left == nullptr) {
-            write("Couldn't delete value: " + to_string(value));
+            write("2Couldn't delete value: " + to_string(value));
             return;
         }
 
@@ -241,23 +252,37 @@ void TREE::delete_node_helper(node_t* node, int value) {
     }
 }
 
-node_t TREE::find_node(int value) {
-    return *get_node(Root, value);
+bool TREE::find_node(int value) {
+    /* Get the node */
+    node_t temp = *get_node(Root, value);
+    
+    /* Compare the node */
+    if (temp.value == value) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 bool TREE::check_balance() {
+    /* Guaruntee that heights are correct */
     reset_heights(Root);
+    /* Check the balance */
     return check_balance_helper(Root);
 }
 
 bool TREE::check_balance_helper(node_t* node) {
+    /* If we accidentally passed to a nullptr */
     if (node == nullptr) {
         return true;
     }
 
+    /* Store the heights */
     int left_height = get_height(node->left);
     int right_height = get_height(node->right);
 
+    /* Compare the heights */
     if ((abs(node->height - left_height) > 2) || (abs(node->height - right_height) > 2)) {
         return false;
     }
@@ -284,7 +309,7 @@ void TREE::traverse_pre() {
 
 void TREE::traverse_pre_helper(node_t* node, string tabs) {
     //self
-    write(tabs + to_string(node->value) + '\n');
+    write(to_string(node->value) + ' ');
 
     //left
     if (node->left != nullptr) {
@@ -313,7 +338,7 @@ void TREE::traverse_in_helper(node_t* node, string tabs) {
     }
     
     //self
-    write(tabs + to_string(node->value) + '\n');
+    write(to_string(node->value) + ' ');
 
     //right
     if (node->right != nullptr) {
@@ -342,41 +367,41 @@ void TREE::traverse_post_helper(node_t* node, string tabs) {
     }
 
     //self
-    write(tabs + to_string(node->value) + '\n');
+    write(to_string(node->value) + ' ');
 }
 
 void TREE::rotate_right(node_t* node) {
-    cout << "rotate right" << endl;
     // node_t* y = node;
     node_t* x = node->left;
     // node_t* x_r = node->left->right;
 
     node->left = node->left->right;
     x->right = node;
-    node = x;
-    cout << "rotate right end" << endl;
+    
     reset_heights(node);
-    cout << "Node value" << node->value << endl;
+
+    node = x;
 }
 
 void TREE::rotate_left(node_t* node) {
-    cout << "rotate left" << endl;
     // node_t* x = node;
     node_t* y = node->right;
     // node_t* y_l = node->right->left;
 
     node->right = node->right->left;
     y->left = node;
-    node = y;
-    cout << "rotate left end" << endl;
+
     reset_heights(node);
-    cout << "Node value" << node->value << endl;
+
+    node = y;
 }
 
 node_t* TREE::get_node(node_t* node, int value) {
+    /* Check self */
     if (value == node->value) {
         return node;
     }
+    /* Check right */
     else if (value > node->value) {
         if (node->right == nullptr) {
             return node;
@@ -385,6 +410,7 @@ node_t* TREE::get_node(node_t* node, int value) {
             return get_node(node->right, value);
         }
     }
+    /* Check left */
     else {  //value < node->value
         if (node->left == nullptr) {
             return node;
@@ -405,8 +431,11 @@ int TREE::get_height(node_t* node) {
 }
 
 void TREE::reset_heights(node_t* node) {
+    if (node == nullptr) {
+        return;
+    }
     //No children
-    if (node->right == nullptr && node->left == nullptr) {
+    else if (node->right == nullptr && node->left == nullptr) {
         node->height = 1;
     }
     //Two children
@@ -436,13 +465,14 @@ void TREE::rebalance() {
 }
 
 void TREE::rebalance_helper(node_t* node) {
-    // cout << "Rebalancing node " << node->value << endl;
+    if (node == nullptr) {
+        return;
+    }
 
+    /* If right has a height too large, rotate */
     if (node->right != nullptr) {
-        // cout << "Right" << endl;
-        if (node->height - node->right->height > 2) {
-            rotate_right(node);
-            rebalance_helper(node);     //Rebalance this node because it could still be unbalanced
+        if ((node->height - node->right->height) > 2) {
+            rotate_left(node);
         }
         else {
             rebalance_helper(node->right);
@@ -451,15 +481,13 @@ void TREE::rebalance_helper(node_t* node) {
     else { //node->right == nullptr
         if (node->height > 2) {
             rotate_right(node);
-            rebalance_helper(node);
         }
     }
 
+    /* If left has a height too large, rotate */
     if (node->left != nullptr) {
-        // cout << "Left" << endl;
-        if (node->height - node->left->height > 2) {
-            rotate_left(node);
-            rebalance_helper(node);     //Rebalance this node because it could still be unbalanced
+        if ((node->height - node->left->height) > 2) {
+            rotate_right(node);
         }
         else {
             rebalance_helper(node->left);
@@ -468,7 +496,6 @@ void TREE::rebalance_helper(node_t* node) {
     else {  //node->left == nullptr
         if (node->height > 2) {
             rotate_left(node);
-            rebalance_helper(node);
         }
     }
 }
@@ -479,6 +506,9 @@ void TREE::print_heights() {
 }
 
 void TREE::print_heights_helper(node_t* node, string tabs) {
+    if (node == nullptr) {
+        return;
+    }
     //self
     write(tabs + to_string(node->value) + ' ' + to_string(node->height) + '\n');
 

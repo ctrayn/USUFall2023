@@ -1,0 +1,1200 @@
+<strong>
+==============
+ Assignment 1
+==============
+</strong>
+Semiconductor Materials 
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 1
+===========
+</strong>
+A piece of Si material is doped with phosphorus at a concentration of
+ND = 1e+15  dopants per cm^3. What is the equilibrium concentration
+of mobile holes in the material at room temperature?
+Give your answer in units of carriers per cm3.
+
+Given information (available in workspace):
+
+* ni = 1.5e+10 carriers per cm^3 
+* ND = 1e+15 donors per cm^3 
+
+
+
+Enter your calculations at the prompt below
+problem 1 >> {Operation terminated by user during matlab_assignment
+} 
+matlab_assignment
+<strong>
+==============
+ Assignment 1
+==============
+</strong>
+Semiconductor Materials 
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 1
+===========
+</strong>
+A piece of Si material is doped with phosphorus at a concentration of
+ND = 1e+15  dopants per cm^3. What is the equilibrium concentration
+of mobile holes in the material at room temperature?
+Give your answer in units of carriers per cm3.
+
+Given information (available in workspace):
+
+* ni = 1.5e+10 carriers per cm^3 
+* ND = 1e+15 donors per cm^3 
+
+
+
+Enter your calculations at the prompt below
+problem 1 >> Ut
+
+Unrecognized function or variable 'Ut'.
+
+syntax error...
+problem 1 >> UT
+
+Unrecognized function or variable 'UT'.
+
+syntax error...
+problem 1 >> ut
+
+Unrecognized function or variable 'ut'.
+
+syntax error...
+problem 1 >> Ut = 26e-3
+
+	26 m
+problem 1 >> ni
+
+	15 G
+problem 1 >> ND
+
+	1 P
+problem 1 >> p0 = (ni^2)/ND
+
+	225 k
+problem 1 >> submit p0
+
+	225 k
+<strong>
+Correct Answer :)
+</strong>--- press enter to continue ---
+
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 2
+===========
+</strong>
+
+A piece of Si is doped with boron at a concentration of 1e+06
+dopants per cm^3. What is the equilibrium concentration of mobile holes
+in the material at room temperature? Give your answer in
+carriers per cm^3.
+
+Given information (available in workspace):
+
+* ni = 1.5e+10 carriers per cm^3 
+* NA = 1e+06 donors per cm^3 
+
+
+
+Enter your calculations at the prompt below
+problem 2 >> Ut
+
+	26 m
+problem 2 >> ni
+
+	15 G
+problem 2 >> ND
+
+Unrecognized function or variable 'ND'.
+
+syntax error...
+problem 2 >> NA
+
+	1 M
+problem 2 >> n0 = (ni^2)/NA
+
+	225 T
+problem 2 >> submit n0
+
+	225 T
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit NA
+
+	1 M
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> p0
+
+	225 k
+problem 2 >> p0 = (ni^2)/NA
+
+	225 T
+problem 2 >> skip
+--- press enter to continue ---
+
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 3
+===========
+</strong>
+
+A piece of intrinsic single-crystal Si is 2 mm long,
+100 um wide and 100 um thick.
+What is its resistance?
+
+Given information (available in workspace):
+
+* ni   = 1.5e+10 carriers per cm^3 
+* q    = 1.6e-19 Coulombs per carrier
+* L    = 2  mm 
+* W    = 100 um (remember to convert to cm!)
+* t    = 100 um (remember to convert to cm!)
+* mu_n = 1.35e+03 cm^2/(V*s)
+* mu_p = 4.8e+02 cm^2/(V*s)
+
+
+
+Enter your calculations at the prompt below
+problem 3 >> R
+
+Unrecognized function or variable 'R'.
+
+syntax error...
+problem 3 >> R = (L*W*t)/(L) * 1/((mu_p * p) + (mu_n * n))
+
+Unrecognized function or variable 'p'.
+
+syntax error...
+problem 3 >> Acs = 0.2 * .0001 * .0001
+
+	2 n
+problem 3 >> Acs = 2m *100u*100u
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+problem 3 >> Acs = 2 m *100 u*100 u
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+problem 3 >> Acs = 2 m * 100 u * 100 u
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+problem 3 >> Acs = 2m*100u*100u
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+problem 3 >> 2m
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+problem 3 >> 2n
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+problem 3 >> Acs = 0.2e-6
+
+	200 n
+problem 3 >> ski
+
+Unrecognized function or variable 'ski'.
+
+syntax error...
+problem 3 >> skip
+--- press enter to continue ---
+
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 4
+===========
+</strong>
+
+A piece of extrinsic single-crystal Si is doped with Boron at a
+concentration of NA=1e+13 acceptors per cm^3, AND is doped
+with Phosphorous at a concentration of ND=1e+16 donors
+per cm^3. What is the concentration of mobile holes in the material?
+Give your answer in units of carriers per cm^3, and round to two significant
+figures.
+
+Given information (available in the workspace):
+
+* ni   = 1.5e+10 carriers per cm^3 
+* NA   = 1e+13 carriers per cm^3 
+* ND   = 1e+16 carriers per cm^3 
+
+
+
+
+Enter your calculations at the prompt below
+problem 4 >> p0 = (ni^2)/ND
+
+	22.5 k
+problem 4 >> submit p0
+
+	22.5 k
+<strong>
+Correct Answer :)
+</strong>--- press enter to continue ---
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 5
+===========
+</strong>
+A Si device is connected in a circuit such that the total
+current is 1mA. At a position x in the material, the
+total diffusion current is 400uA. What is
+the total drift current at position x? Give your answer
+in uA.
+
+
+
+Enter your calculations at the prompt below
+problem 5 >> 600u
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+problem 5 >> submit 600
+
+	600 
+<strong>
+Correct Answer :)
+</strong>--- press enter to continue ---
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 6
+===========
+</strong>
+
+A homogeneous intrinsic semiconducting material has an
+intrinsic mobile carrier concentration of ni=1e+11 carriers per cm^3,
+giving it a resistivity of 46 kOhm/cm.
+Under strong illumination, the material absorbs photons which
+increase the carrier concentration to 1e+14 carriers per cm^3.
+What is the new resistivity after illuminating the material?
+
+
+
+Enter your calculations at the prompt below
+problem 6 >> submit 46
+
+	46 
+<strong>
+Correct Answer :)
+</strong>--- press enter to continue ---
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 7
+===========
+</strong>
+
+A semiconducting material has a mobile electron concentration given by
+n(x) = N0*exp(-x/100nm),
+where N0=1e+12 electrons per cm^3. What is the electron
+diffusion current density at position x=1um?
+Give your answer in A/cm^2.
+
+Given Information (available in the workspace):
+
+* UT = 26 mV 
+* mu_n = 1.1 k cm^2/V*s  
+* N0 = 1e+12 carriers per cm^3 
+
+
+
+Enter your calculations at the prompt below
+problem 7 >> skip
+--- press enter to continue ---
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 8
+===========
+</strong>
+
+A piece of intrinsic silicon carries an electron drift current
+density of Jn=1 uA/cm^2. If the mobility of electrons is
+mu_n= 1.5 k cm^2/V*s, calculate the electric field
+strength in the material. Give your answer in V/cm.
+
+Given information (available in the workspace):
+
+* mu_n= 1.5 k cm^2/V*s 
+* ni= 1.5e+10 electrons per cm^3 
+* q= 1.6e-19 Coulombs per electron
+
+
+
+Enter your calculations at the prompt below
+problem 8 >> E
+
+Unrecognized function or variable 'E'.
+
+syntax error...
+problem 8 >> E = ni/mu_n
+
+	10 M
+problem 8 >> E = E * q
+
+	1.602 p
+problem 8 >> submit E
+
+	1.602 p
+<strong>
+Incorrect Answer :(
+</strong>problem 8 >> E = q/(ni * mu_n)
+
+	7.12e-33 
+problem 8 >> submit E
+
+	7.12e-33 
+<strong>
+Incorrect Answer :(
+</strong>problem 8 >> skip
+--- press enter to continue ---
+
+
+<strong>Thanks for completing the assignment!
+
+</strong><strong>
+==============
+ Assignment 1
+==============
+</strong>
+Semiconductor Materials 
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 1
+===========
+</strong>
+A piece of Si material is doped with phosphorus at a concentration of
+ND = 1e+15  dopants per cm^3. What is the equilibrium concentration
+of mobile holes in the material at room temperature?
+Give your answer in units of carriers per cm3.
+
+Given information (available in workspace):
+
+* ni = 1.5e+10 carriers per cm^3 
+* ND = 1e+15 donors per cm^3 
+
+
+
+Enter your calculations at the prompt below
+<strong>Problem 1 Already Done
+</strong>--- press enter to continue ---
+
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 2
+===========
+</strong>
+
+A piece of Si is doped with boron at a concentration of 1e+06
+dopants per cm^3. What is the equilibrium concentration of mobile holes
+in the material at room temperature? Give your answer in
+carriers per cm^3.
+
+Given information (available in workspace):
+
+* ni = 1.5e+10 carriers per cm^3 
+* NA = 1e+06 donors per cm^3 
+
+
+
+Enter your calculations at the prompt below
+problem 2 >> p0 = (ni^2)/NA
+
+	225 T
+problem 2 >> submit p0
+
+	225 T
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit NA
+
+	1 M
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> skip
+--- press enter to continue ---
+
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 3
+===========
+</strong>
+
+A piece of intrinsic single-crystal Si is 2 mm long,
+100 um wide and 100 um thick.
+What is its resistance?
+
+Given information (available in workspace):
+
+* ni   = 1.5e+10 carriers per cm^3 
+* q    = 1.6e-19 Coulombs per carrier
+* L    = 2  mm 
+* W    = 100 um (remember to convert to cm!)
+* t    = 100 um (remember to convert to cm!)
+* mu_n = 1.35e+03 cm^2/(V*s)
+* mu_p = 4.8e+02 cm^2/(V*s)
+
+
+
+Enter your calculations at the prompt below
+problem 3 >> skip
+--- press enter to continue ---
+
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 4
+===========
+</strong>
+
+A piece of extrinsic single-crystal Si is doped with Boron at a
+concentration of NA=1e+13 acceptors per cm^3, AND is doped
+with Phosphorous at a concentration of ND=1e+16 donors
+per cm^3. What is the concentration of mobile holes in the material?
+Give your answer in units of carriers per cm^3, and round to two significant
+figures.
+
+Given information (available in the workspace):
+
+* ni   = 1.5e+10 carriers per cm^3 
+* NA   = 1e+13 carriers per cm^3 
+* ND   = 1e+16 carriers per cm^3 
+
+
+
+
+Enter your calculations at the prompt below
+<strong>Problem 4 Already Done
+</strong>--- press enter to continue ---
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 5
+===========
+</strong>
+A Si device is connected in a circuit such that the total
+current is 1mA. At a position x in the material, the
+total diffusion current is 400uA. What is
+the total drift current at position x? Give your answer
+in uA.
+
+
+
+Enter your calculations at the prompt below
+<strong>Problem 5 Already Done
+</strong>--- press enter to continue ---
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 6
+===========
+</strong>
+
+A homogeneous intrinsic semiconducting material has an
+intrinsic mobile carrier concentration of ni=1e+11 carriers per cm^3,
+giving it a resistivity of 46 kOhm/cm.
+Under strong illumination, the material absorbs photons which
+increase the carrier concentration to 1e+14 carriers per cm^3.
+What is the new resistivity after illuminating the material?
+
+
+
+Enter your calculations at the prompt below
+<strong>Problem 6 Already Done
+</strong>--- press enter to continue ---
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 7
+===========
+</strong>
+
+A semiconducting material has a mobile electron concentration given by
+n(x) = N0*exp(-x/100nm),
+where N0=1e+12 electrons per cm^3. What is the electron
+diffusion current density at position x=1um?
+Give your answer in A/cm^2.
+
+Given Information (available in the workspace):
+
+* UT = 26 mV 
+* mu_n = 1.1 k cm^2/V*s  
+* N0 = 1e+12 carriers per cm^3 
+
+
+
+Enter your calculations at the prompt below
+problem 7 >> n = NO * exp(-x/100e-9)
+
+Unrecognized function or variable 'NO'.
+
+syntax error...
+problem 7 >> n = N0 * exp(-x/100e-9)
+
+Unrecognized function or variable 'x'.
+
+syntax error...
+problem 7 >> n = N0 * exp(-1e-6/100e-9)
+
+	45.4 M
+problem 7 >> I = n * mu_n * UT
+
+	1.298 G
+problem 7 >> submit I
+
+	1.298 G
+<strong>
+Incorrect Answer :(
+</strong>problem 7 >> gradient
+
+Not enough input arguments.
+
+syntax error...
+problem 7 >> skip
+--- press enter to continue ---
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 8
+===========
+</strong>
+
+A piece of intrinsic silicon carries an electron drift current
+density of Jn=1 uA/cm^2. If the mobility of electrons is
+mu_n= 1.5 k cm^2/V*s, calculate the electric field
+strength in the material. Give your answer in V/cm.
+
+Given information (available in the workspace):
+
+* mu_n= 1.5 k cm^2/V*s 
+* ni= 1.5e+10 electrons per cm^3 
+* q= 1.6e-19 Coulombs per electron
+
+
+
+Enter your calculations at the prompt below
+problem 8 >> skip
+--- press enter to continue ---
+
+
+<strong>Thanks for completing the assignment!
+
+</strong><strong>
+==============
+ Assignment 1
+==============
+</strong>
+Semiconductor Materials 
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 1
+===========
+</strong>
+A piece of Si material is doped with phosphorus at a concentration of
+ND = 1e+15  dopants per cm^3. What is the equilibrium concentration
+of mobile holes in the material at room temperature?
+Give your answer in units of carriers per cm3.
+
+Given information (available in workspace):
+
+* ni = 1.5e+10 carriers per cm^3 
+* ND = 1e+15 donors per cm^3 
+
+
+
+Enter your calculations at the prompt below
+<strong>Problem 1 Already Done
+</strong>--- press enter to continue ---
+
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 2
+===========
+</strong>
+
+A piece of Si is doped with boron at a concentration of 1e+06
+dopants per cm^3. What is the equilibrium concentration of mobile holes
+in the material at room temperature? Give your answer in
+carriers per cm^3.
+
+Given information (available in workspace):
+
+* ni = 1.5e+10 carriers per cm^3 
+* NA = 1e+06 donors per cm^3 
+
+
+
+Enter your calculations at the prompt below
+problem 2 >> {Operation terminated by user during matlab_assignment
+} 
+matlab_assignment
+<strong>
+==============
+ Assignment 1
+==============
+</strong>
+Semiconductor Materials 
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 1
+===========
+</strong>
+A piece of Si material is doped with phosphorus at a concentration of
+ND = 1e+15  dopants per cm^3. What is the equilibrium concentration
+of mobile holes in the material at room temperature?
+Give your answer in units of carriers per cm3.
+
+Given information (available in workspace):
+
+* ni = 1.5e+10 carriers per cm^3 
+* ND = 1e+15 donors per cm^3 
+
+
+
+Enter your calculations at the prompt below
+<strong>Problem 1 Already Done
+</strong>--- press enter to continue ---
+
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 2
+===========
+</strong>
+
+A piece of Si is doped with boron at a concentration of 1e+06
+dopants per cm^3. What is the equilibrium concentration of mobile holes
+in the material at room temperature? Give your answer in
+carriers per cm^3.
+
+Given information (available in workspace):
+
+* ni = 1.5e+10 carriers per cm^3 
+* NA = 1e+06 donors per cm^3 
+
+
+
+Enter your calculations at the prompt below
+problem 2 >> submit NA
+
+	1 M
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit (ni^2)/NA
+
+	225 T
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit NA/(ni^2)
+
+	4.444 f
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit (ni)/NA
+
+	15 k
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> NA
+
+	1 M
+problem 2 >> ni
+
+	15 G
+problem 2 >> ni^2
+
+	225 E
+problem 2 >> ni^2/NA
+
+	225 T
+problem 2 >> 1.5*1.5
+
+	2.25 
+problem 2 >> skip
+--- press enter to continue ---
+
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 3
+===========
+</strong>
+
+A piece of intrinsic single-crystal Si is 2 mm long,
+100 um wide and 100 um thick.
+What is its resistance?
+
+Given information (available in workspace):
+
+* ni   = 1.5e+10 carriers per cm^3 
+* q    = 1.6e-19 Coulombs per carrier
+* L    = 2  mm 
+* W    = 100 um (remember to convert to cm!)
+* t    = 100 um (remember to convert to cm!)
+* mu_n = 1.35e+03 cm^2/(V*s)
+* mu_p = 4.8e+02 cm^2/(V*s)
+
+
+
+Enter your calculations at the prompt below
+problem 3 >> skip
+--- press enter to continue ---
+
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 4
+===========
+</strong>
+
+A piece of extrinsic single-crystal Si is doped with Boron at a
+concentration of NA=1e+13 acceptors per cm^3, AND is doped
+with Phosphorous at a concentration of ND=1e+16 donors
+per cm^3. What is the concentration of mobile holes in the material?
+Give your answer in units of carriers per cm^3, and round to two significant
+figures.
+
+Given information (available in the workspace):
+
+* ni   = 1.5e+10 carriers per cm^3 
+* NA   = 1e+13 carriers per cm^3 
+* ND   = 1e+16 carriers per cm^3 
+
+
+
+
+Enter your calculations at the prompt below
+<strong>Problem 4 Already Done
+</strong>--- press enter to continue ---
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 5
+===========
+</strong>
+A Si device is connected in a circuit such that the total
+current is 1mA. At a position x in the material, the
+total diffusion current is 400uA. What is
+the total drift current at position x? Give your answer
+in uA.
+
+
+
+Enter your calculations at the prompt below
+<strong>Problem 5 Already Done
+</strong>--- press enter to continue ---
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 6
+===========
+</strong>
+
+A homogeneous intrinsic semiconducting material has an
+intrinsic mobile carrier concentration of ni=1e+11 carriers per cm^3,
+giving it a resistivity of 46 kOhm/cm.
+Under strong illumination, the material absorbs photons which
+increase the carrier concentration to 1e+14 carriers per cm^3.
+What is the new resistivity after illuminating the material?
+
+
+
+Enter your calculations at the prompt below
+<strong>Problem 6 Already Done
+</strong>--- press enter to continue ---
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 7
+===========
+</strong>
+
+A semiconducting material has a mobile electron concentration given by
+n(x) = N0*exp(-x/100nm),
+where N0=1e+12 electrons per cm^3. What is the electron
+diffusion current density at position x=1um?
+Give your answer in A/cm^2.
+
+Given Information (available in the workspace):
+
+* UT = 26 mV 
+* mu_n = 1.1 k cm^2/V*s  
+* N0 = 1e+12 carriers per cm^3 
+
+
+
+Enter your calculations at the prompt below
+problem 7 >> x
+
+Unrecognized function or variable 'x'.
+
+syntax error...
+problem 7 >> x = 1e-6
+
+	1 u
+problem 7 >> 1nm
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+problem 7 >> 1n
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+problem 7 >> 1N
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+problem 7 >> 1K
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+problem 7 >> 1k
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+problem 7 >> -x*N0/(100e-6)*exp(-x/100e-6)
+
+	-9.9 G
+problem 7 >> grad_n = -
+-------- >> 
+
+syntax error...
+problem 7 >> grad_n = -x*N0/100e-6*exp(-x/100e-6)
+
+	-9.9 G
+problem 7 >> grad_n
+
+	-9.9 G
+problem 7 >> Ut
+
+Unrecognized function or variable 'Ut'.
+
+syntax error...
+problem 7 >> grad_n*UT*mu_n
+
+	-283.2 G
+problem 7 >> I = grad_n*UT*mu_n
+
+	-283.2 G
+problem 7 >> submit I
+
+	-283.2 G
+<strong>
+Incorrect Answer :(
+</strong>problem 7 >> skip
+--- press enter to continue ---
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 8
+===========
+</strong>
+
+A piece of intrinsic silicon carries an electron drift current
+density of Jn=1 uA/cm^2. If the mobility of electrons is
+mu_n= 1.5 k cm^2/V*s, calculate the electric field
+strength in the material. Give your answer in V/cm.
+
+Given information (available in the workspace):
+
+* mu_n= 1.5 k cm^2/V*s 
+* ni= 1.5e+10 electrons per cm^3 
+* q= 1.6e-19 Coulombs per electron
+
+
+
+Enter your calculations at the prompt below
+problem 8 >> Jn
+
+	1 u
+problem 8 >> 1 u
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+problem 8 >> 1u
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+problem 8 >> Jn/(q*ni*mu_n)
+
+	277.4 m
+problem 8 >> submit Jn/(q*ni*mu_n)
+
+	277.4 m
+<strong>
+Correct Answer :)
+</strong>--- press enter to continue ---
+
+
+<strong>Thanks for completing the assignment!
+
+</strong><strong>
+==============
+ Assignment 1
+==============
+</strong>
+Semiconductor Materials 
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 1
+===========
+</strong>
+A piece of Si material is doped with phosphorus at a concentration of
+ND = 1e+15  dopants per cm^3. What is the equilibrium concentration
+of mobile holes in the material at room temperature?
+Give your answer in units of carriers per cm3.
+
+Given information (available in workspace):
+
+* ni = 1.5e+10 carriers per cm^3 
+* ND = 1e+15 donors per cm^3 
+
+
+
+Enter your calculations at the prompt below
+<strong>Problem 1 Already Done
+</strong>--- press enter to continue ---
+
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 2
+===========
+</strong>
+
+A piece of Si is doped with boron at a concentration of 1e+06
+dopants per cm^3. What is the equilibrium concentration of mobile holes
+in the material at room temperature? Give your answer in
+carriers per cm^3.
+
+Given information (available in workspace):
+
+* ni = 1.5e+10 carriers per cm^3 
+* NA = 1e+06 donors per cm^3 
+
+
+
+Enter your calculations at the prompt below
+problem 2 >> submit ni/NA
+
+	15 k
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit NA/ni
+
+	66.67 u
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit (ni^2)/NA
+
+	225 T
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit 225 e6
+
+Invalid expression. Check for missing multiplication operator, missing or unbalanced delimiters, or other syntax error. To construct matrices, use brackets instead of parentheses.
+
+syntax error...
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit 225e6
+
+	225 M
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit 225e3
+
+	225 k
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit 225
+
+	225 
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit 225e-3
+
+	225 m
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit 225e-6
+
+	225 u
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit 225e-9
+
+	225 n
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit 225e-12
+
+	225 p
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit 225e9
+
+	225 G
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit 225e12
+
+	225 T
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> submit 225e15
+
+	225 P
+<strong>
+Incorrect Answer :(
+</strong>problem 2 >> UT
+
+Unrecognized function or variable 'UT'.
+
+syntax error...
+problem 2 >> submit ni
+
+	15 G
+<strong>
+Correct Answer :)
+</strong>--- press enter to continue ---
+
+
+
+--- press enter to continue ---
+<strong>
+===========
+Problem 3
+===========
+</strong>
+
+A piece of intrinsic single-crystal Si is 2 mm long,
+100 um wide and 100 um thick.
+What is its resistance?
+
+Given information (available in workspace):
+
+* ni   = 1.5e+10 carriers per cm^3 
+* q    = 1.6e-19 Coulombs per carrier
+* L    = 2  mm 
+* W    = 100 um (remember to convert to cm!)
+* t    = 100 um (remember to convert to cm!)
+* mu_n = 1.35e+03 cm^2/(V*s)
+* mu_p = 4.8e+02 cm^2/(V*s)
+
+
+
+Enter your calculations at the prompt below
+problem 3 >> Acs = L*10 * W*1e6
+
+	2 G
+problem 3 >> rho = 1/(q(mu_n*ni + mu_p*ni))
+
+Index exceeds the number of array elements. Index must not exceed 1.
+
+syntax error...
+problem 3 >> rho = 1/(q*(mu_n*ni + mu_p*ni))
+
+	227.4 k
+problem 3 >> submit rho*t
+
+	22.74 M
+<strong>
+Incorrect Answer :(
+</strong>problem 3 >> submit rho*t*1e6
+
+	22.74 T
+<strong>
+Incorrect Answer :(
+</strong>problem 3 >> {Operation terminated by user during matlab_assignment
+} 

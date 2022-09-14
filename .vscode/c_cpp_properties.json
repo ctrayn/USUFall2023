@@ -3,7 +3,8 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/Network_5600/Sample_codes"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

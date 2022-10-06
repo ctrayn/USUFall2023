@@ -1,0 +1,35 @@
+#lang ivy1.7
+
+include order
+include collections
+
+module shift_theory(idx) = {
+
+    relation r(T : idx, X : idx, Y : idx)
+    action f(t:idx,x:idx) returns (y:idx)
+
+    specification {
+        property r(T,X,Y) & r(T,X,Y1) -> Y = Y1
+        property r(T,X,Y) & r(T,X1,Y) -> X = X1
+        property r(T,X1,Y1) & r(T,X2,Y2) & X1 < X2 -> Y1 < Y2
+        property r(T1,X,Y1) & r(T2,X,Y2) & T1 < T2 -> Y2 < Y1
+        property r(T,X1,Y1) & idx.succ(X1,X2) & idx.succ(Y1,Y2) -> r(T,X2,Y2)
+        property r(0,X,X)
+        property r(T,X,Y) -> Y <= X & T <= X
+
+        around f {
+            require t <= x;
+            ...
+            ensure r(t,x,y)
+        }
+
+    } # end specification section
+
+    implementation {
+        definition r(T,X,Y) = (X = Y + T)
+        implement f {
+            y := x - t
+        }
+    }
+    isolate iso = this with idx.impl
+}

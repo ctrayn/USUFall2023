@@ -1,0 +1,100 @@
+#lang ivy1.7
+
+include shift_theory
+
+module window(idx,data) = {
+
+    relation value(I:idx,D:data)
+    individual begin : idx
+    individual end : idx
+
+    action append(d:data)
+    action read(i:idx) returns (d:data)
+    action trim(i:idx)
+
+    specification {
+
+        after init {
+            begin := 0;
+            end := 0;
+            value(I,D) := false
+        }
+
+        after append {
+            value(end,d) := true;
+            end := end.next
+        }
+
+        around read {
+            require begin <= i & i < end;
+            ...
+            ensure value(i,d)
+        }
+
+        around trim {
+            require begin <= i & i <= end;
+            ...
+            begin := i;
+        }
+
+        invariant begin <= end
+        invariant value(I,D1) & value(I,D2) -> D1 = D2
+        invariant value(I,D) -> 0 <= I & I < end
+    }
+
+    implementation {
+
+        instance shift : shift_theory(idx)
+        instance arr : array(idx,data)
+
+        var offset : idx
+        var bound : idx
+        var content : arr
+
+        after init {
+            offset := 0;
+            bound := 0;
+            content := arr.empty
+        }
+
+        implement append {
+            content := content.append(d);
+            bound := bound.next;
+        }
+
+        implement read {
+            d := content.value(shift.f(offset,i))
+        }
+
+        implement trim {
+            var j := i;
+            while j < bound
+            invariant i <= j & j <= bound & shift.r(offset,bound,content.end)
+            invariant j <= X & X < bound & shift.r(offset,X,Y) -> value(X,content.value(Y))
+            invariant X < j & shift.r(i,X,Y) -> value(X,content.value(Y))
+            {
+                content := content.set(shift.f(i,j),content.value(shift.f(offset,j)));
+                j := j.next;
+            };
+            content := content.resize(shift.f(i,bound),0);
+            offset := i
+        }
+
+    }
+
+    private {
+        invariant offset = begin & bound = end
+        invariant shift.r(offset,end,content.end)
+        invariant shift.r(offset,X,Y) & X < end -> value(X,content.value(Y))
+    }
+
+    isolate iso = this with idx
+}
+
+instance idx : unbounded_sequence
+type data
+instance w : window(idx,data)
+
+export w.append
+export w.read
+export w.trim

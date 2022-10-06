@@ -1,0 +1,8 @@
+IB = 100e-6 # A
+VDD = 10 # V
+K_N = 590e-6
+K_P = 454.4e-6
+V_THN = 0.43
+V_THP = 0.4
+LAMBDA_N = 0.06
+LAMBDA_P = 0.1

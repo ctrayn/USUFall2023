@@ -24,14 +24,24 @@ int main() {
         nodes.push_back(node_t(id, stof(area), stof(ratio)));
     }
 
-    cout << "*****************" << endl;
-    cout << "Discovering Nodes" << endl;
-    for (int i = 0; i < nodes.size(); i++) {
-        cout << nodes[i].id << " " << endl;
-    }
-    cout << "*****************" << endl;
+    // cout << "*****************" << endl;
+    // cout << "Discovering Nodes" << endl;
+    // for (int i = 0; i < nodes.size(); i++) {
+        // cout << nodes[i].id << " " << endl;
+    // }
+    // cout << "*****************" << endl;
 
-    // cost("213546H7VHVa8V9HcVHgHibdHkVHfeHVlHVjHVH", nodes);
-    cost("21H", nodes);
+    float cost3a = npe_cost("12V3V4V5V6V7V8V9VaVbVcVdVeVfVgViVjVkVlV", nodes);
+    // printf("**********************************************\n");
+    float cost3b = npe_cost("12H3H4H5H6H7H8H9HaHbHcHdHeHfHgHiHjHkHlH", nodes);
+    // printf("**********************************************\n");
+    float cost3c = npe_cost("213546H7VHVa8V9HcVHgHibdHkVHfeHVlHVjHVH", nodes);
+
+    printf("\n");
+    printf(" Problem # |   Cost   \n");
+    printf("-----------|----------\n");
+    printf("     3a    | %f \n", cost3a);
+    printf("     3b    | %f \n", cost3b);
+    printf("     3c    | %f \n", cost3c);
     return 0;
 }

@@ -42,7 +42,7 @@ bool check_balloting(string NPE) {
     }
 }
 
-int cost(string NPE, vector<node_t> nodes) {
+float npe_cost(string NPE, vector<node_t> nodes) {
     cout << "Starting cost for NPE " << NPE << endl;
     vector<node_t> stack = {};
     node_t first;
@@ -54,10 +54,10 @@ int cost(string NPE, vector<node_t> nodes) {
     char current;
     for (int i = 0; i < npe_size; i++) {
         current = NPE[i];
-        cout << "Current char " << current << endl;
+        // printf("Current char %c ", current);
 
         if (current == 'V' || current == 'v') { //Vertical cut
-            cout << "Into Vertical" << endl;
+            // printf("Vertical ");
             //take two off the stack and combine orientations
             first = stack.back();
             stack.pop_back();
@@ -67,18 +67,37 @@ int cost(string NPE, vector<node_t> nodes) {
             
             int f_size = first.orientations.size();
             int s_size = second.orientations.size();
+            // printf("\nFirst: %c\n", first.id[0]);
+            // for (int i = 0; i < first.orientations.size(); i++) {
+            //     printf("\t");
+            //     first.orientations[i].print('\n');
+            // }
+            // printf("Second: %c\n", second.id[0]);
+            // for (int i = 0; i < second.orientations.size(); i++) {
+            //     printf("\t");
+            //     second.orientations[i].print('\n');
+            // }
+
+            // cout << "Adding node to stack " << sub_tree.id << " with orientations: " << endl;
             for (int f = 0; f < f_size; f++) {
-                for (int s = 0; f < s_size; f++) {
+                for (int s = 0; s < s_size; s++) {
                     orient.height = max(first.orientations[f].height, second.orientations[s].height);
                     orient.width = first.orientations[f].width + second.orientations[s].width;
+                    // printf("First width %f Second width %f, Orient width %f\n", first.orientations[f].width, second.orientations[s].width, orient.width);
                     sub_tree.orientations.push_back(orient);
+                    // orient.print('\n');
                 }
             }
             sub_tree.trim_orientations();
+            // printf("\n");
+            // for (int i = 0; i < sub_tree.orientations.size(); i++) {
+                // printf("i %d\t", i);
+                // sub_tree.orientations[i].print('\n');
+            // }
             stack.push_back(sub_tree);
         }
         else if (current == 'H' || current == 'h') {    //Horizontal cut
-            cout << "Into Horizontal" << endl;
+            // printf("Horizontal ");
             //take two off the stack and combine orientations
             first = stack.back();
             stack.pop_back();
@@ -86,40 +105,59 @@ int cost(string NPE, vector<node_t> nodes) {
             stack.pop_back();
             sub_tree = node_t(second.id + first.id + current);
 
+            // cout << "Adding node to stack " << sub_tree.id << " with orientations: ";
             int f_size = first.orientations.size();
             int s_size = second.orientations.size();
+            // printf("\nFirst: %c\n", first.id[0]);
+            // for (int i = 0; i < first.orientations.size(); i++) {
+                // printf("\t");
+            //     first.orientations[i].print('\n');
+            // }
+            // printf("Second: %c\n", second.id[0]);
+            // for (int i = 0; i < second.orientations.size(); i++) {
+            //     printf("\t");
+            //     second.orientations[i].print('\n');
+            // }
+            
             for (int f = 0; f < f_size; f++) {
                 for (int s = 0; s < s_size; s++) {
                     orient.height = first.orientations[f].height + second.orientations[s].height;
+                    // printf("First height %f Second Height %f, Orient Height %f\n", first.orientations[f].height, second.orientations[s].height, orient.height);
                     orient.width = max(first.orientations[f].width, second.orientations[s].width);
                     sub_tree.orientations.push_back(orient);
+                    // orient.print('\n');
                 }
             }
             sub_tree.trim_orientations();
+            // printf("\n");
+            // for (int i = 0; i < sub_tree.orientations.size(); i++) {
+                // printf("i %d\t", i);
+                // sub_tree.orientations[i].print('\n');
+            // }
             stack.push_back(sub_tree);
         }
         else {
-            cout << "Into Operand" << endl;
+            // printf("Operand ");
             // Is an operand, put it onto the stack
             int nodes_size = nodes.size();
             bool found = false;
             for (int n = 0; n < nodes_size; n++) {
                 // cout << "N " << n << " node " << nodes[n].id << endl;
                 if (nodes[n].id[0] == current) {
-                    cout << "Found " << current << endl;
+                    // printf(" Found");
                     stack.push_back(nodes[n]);
                     found = true;
                     break;
                 }
             }
             if (!found) {
-                cout << "Error: node not found: " << current << endl;
+                // printf("Error: node not found: %c\n", current);
                 return -1;
             }
         }
+        // printf("\n");
     }
 
-    cout << NPE << endl;
     node_t final = stack.back();
     stack.pop_back();
     assert(stack.empty());
@@ -128,9 +166,9 @@ int cost(string NPE, vector<node_t> nodes) {
     for (int i = 0; i < final.orientations.size(); i++) {
         float area = final.orientations[i].height * final.orientations[i].width;
         min_area = min(min_area, area);
-        cout << "Orientation " <<  final.orientations[i].height << "-" << final.orientations[i].width<< endl;
+        // printf("Orientation %f-%f Area %f\n", final.orientations[i].height, final.orientations[i].width, area);
     }
-    cout << "Min Area: " << min_area << endl;
+    printf("Min Area: %f\n", min_area);
     
-    return 0;
+    return min_area;
 }

@@ -1,0 +1,135 @@
+#lang ivy1.7
+
+attribute method = mc
+
+type bv8
+interpret bv8 -> bv[8] #lowering this lowers execution time
+
+type rand = {ra1,ra2,ra3,ra4,ra5,ra6}
+var random : rand
+
+# var rand : bv4
+
+object spec = {
+
+var s1 : bv8
+var s2 : bv8
+var s3 : bv8
+var s4 : bv8
+var s5 : bv8
+var s6 : bv8
+
+var r1 : bv8
+var r2 : bv8
+var r3 : bv8
+var r4 : bv8
+var r5 : bv8
+var r6 : bv8
+
+after init {
+  s1 := 1;
+  s2 := 50;
+  s3 := 0;
+  s4 := 1;
+  s5 := 50;
+  s6 := 0;
+  
+  r1 := 0;
+  r2 := 0;
+  r3 := 0;
+  r4 := 0;
+  r5 := 0;
+  r6 := 0;
+  
+} #init
+
+action r_one = {
+  r1 := s1;
+  r2 := s2;
+  r3 := s3;
+  s1 := s1 - 1;
+  s2 := s2 - 1;
+  s3 := s3 + 1;
+} #end r_one
+
+action r_two = {
+  r1 := s1;
+  r2 := s2;
+  r3 := s3;
+  s1 := s1 + 1;
+  s2 := s2 + 1;
+  s3 := s3 - 1;
+} #end r_two
+
+action r_three = {
+  r1 := s1;
+  r3 := s3;
+  r5 := s5;
+  s1 := s1 + 1;
+  s3 := s3 - 1;
+  s5 := s5 + 1;
+} #end r_three
+
+action r_four = {
+  r4 := s4;
+  r5 := s5;
+  r6 := s6;
+  s4 := s4 - 1;
+  s5 := s5 - 1;
+  s6 := s6 + 1;
+} #end r_four
+
+action r_five = {
+  r4 := s4;
+  r5 := s5;
+  r6 := s6;
+  s4 := s4 + 1;
+  s5 := s5 + 1;
+  s6 := s6 - 1;
+} #end r_five
+
+action r_six = {
+  r4 := s4;
+  r2 := s2;
+  r6 := s6;
+  s4 := s4 + 1;
+  s2 := s2 + 1;
+  s6 := s6 - 1;
+} #end r_six
+
+#IVy is having problems with >0, it thought 0>0
+#updating the value to 1 makes it run much much slower.
+
+action start = {
+  random := *;
+  if random = ra1 {
+    assume (s1 > 0 & s1 ~= 0) & (s2 > 0 & s2 ~= 0);
+    call r_one;
+  };
+  if random = ra2 {
+    assume (s3 > 0 & s3 ~= 0);
+    call r_two;
+  };
+  if random = ra3 {
+    assume (s3 > 0 & s3 ~= 0);
+    call r_three;
+  };
+  if random = ra4 {
+    assume (s4 > 0 & s4 ~= 0) & (s5 > 0 & s5 ~= 0);
+    call r_four;
+  };
+  if random = ra5 {
+    assume (s6 > 0 & s6 ~= 0);
+    call r_five;
+  };
+  if random = ra6 {
+    assume (s6 > 0 & s6 ~= 0);
+    call r_six;
+  };
+} #end start
+
+export start
+
+} #end spec
+
+invariant (spec.s5 ~= 40)

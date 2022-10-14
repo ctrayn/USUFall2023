@@ -1,5 +1,5 @@
 CC = g++
-EXEC = npe_cost
+EXEC = npe_cost.exe
 SOURCES = $(wildcard *.cpp)
 
 $(EXEC): $(SOURCES) input_file.txt $(wildcard *.h)

@@ -1,0 +1,79 @@
+#lang ivy1.7
+
+attribute method = mc
+
+type train_ids = {train_W, train_E}
+type train_mode = {waiting, bridge, gone}
+type light_t = {green, red}
+type bool = {0, 1}
+
+var light(X:train_ids) : light_t
+
+object controller = {
+
+    var near(X:train_ids) : bool
+
+    after init {
+        light(X:train_ids) := red;
+    }
+
+    action update_lights = {
+        if near(X:train_ids) = 0 {
+            light(X:train_ids) := red;
+        }
+        else if near(Y:train_ids) = 1 {
+            light(X:train_ids) := green;
+        }
+    }
+
+    action arrive(id:train_ids) = {
+        near(id) := 1;
+        call update_lights;
+    }
+
+    action leave(id:train_ids) = {
+        near(id) := 0;
+        call update_lights;
+    }
+}
+
+module train(id:train_ids) = {
+    individual mode : train_mode
+
+    after init {
+        mode := gone;
+    }
+
+    action move = {
+        if light(id) = green & mode = waiting {
+            mode := bridge;
+            call controller.update_lights;
+        }
+        else {
+            if mode = gone {
+                if * {
+                    mode := gone;
+                }
+                else {
+                    mode := waiting;
+                    call controller.arrive(id);
+                }
+            }
+            else {
+                if mode = bridge {
+                    if * {
+                        mode := bridge;
+                    }
+                    else {
+                        mode := gone;
+                        call controller.leave(id);
+                    }
+                }
+            }
+        }
+    }
+}
+instance train_inst(X:train_ids) : train(X)
+export train_inst(X:train_ids).move
+
+invariant ~(train_inst(train_W).mode = bridge & train_inst(train_E).mode = bridge) 

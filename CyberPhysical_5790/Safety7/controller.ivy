@@ -1,0 +1,23 @@
+#lang=ivy1.7
+
+attribute method = mc
+
+type distance = {near, arrive, gone}
+
+module controller = {
+
+    individual west : distance
+    individual east : distance
+    
+    specification {
+        after init {
+            west := gone
+            east := gone
+        }
+    }
+
+    implementation {
+        instance train
+    }
+
+}

@@ -8,7 +8,7 @@ ECE 6790
 
 ## 3.13
 
-Consider the transition system $Mult(m,n)$ described in exercise 3.1. Describe this transition systme symbolically using initialization and transition formulas.
+Consider the transition system $Mult(m,n)$ described in exercise 3.1. Describe this transition system symbolically using initialization and transition formulas.
 
 ### 3.1
 Given two natural numbers *m* and *n*, consider the program Mult that multiplies the input numbers using two variables *x* and *y*, of type nat, as shown in the below figure.
@@ -28,7 +28,7 @@ States = {loop, stop}
 Transitions
 
     if x > 0 then
-        x := x + 1;
+        x := x - 1;
         y := y + n;
         states := loop;
     else
@@ -36,59 +36,65 @@ Transitions
 
 When x = 0, y must be the product of *m* and *n* because that is the definition of multiplication. Taking a number (*n*) and adding it to itself a number of times (*m*). x is set to the number of times and y is counting the running total.
 ---
+Initial
+$$ x = m; y = 0 $$
+Transition
+$$ if (x > 0) then (x' = x - 1),(y' = y + n) $$
 
-TODO Answer
+---
+---
 
 ## 3.14
-Consider the description fo the component *Switch* given as an extended-state machine in [figure 2.2](figure2.2). Give the initialization and reaction formulas corresponding to *Switch*. Obtain the transition formula for the corresponding transition system in as simplified form as possible.
+Consider the description of the component *Switch* given as an extended-state machine in figure 2.2. Give the initialization and reaction formulas corresponding to *Switch*. Obtain the transition formula for the corresponding transition system in as simplified a form as possible.
 
 ![figure2.2](./figure2.2.png)
 
-If $f$ si a Boolean formula over a set $V$ of variables and $x$ is a variable in $V$, then $\includes x$. $f$ is a Boolean formula over $V/{x}$. For example, if $x$ and $y$ are Boolean variables, then the formula $\includes x.(x and y)$ expresses a constraint only over the variable $y$ and is equivalent to the formula $y$(that is, $\includes x.(x and y)$ evaluates to 1 exactly when $y$ is assigned to 1). Similarly, the formula $\includes x.(x and y)$ is equivalent to 1 (that is, this formula evaluates to 1 independent of the value of y).
-
-The transition formula for the transition sysmte corresponding to *Delay* is
-
-$$ \includes in \includes out.[(out = x) and (x^' = in)] $$
-
-This formula simplifies to the logical constant 1 since the formula is satisfied no matter what the values of $x$ and $x^'$ are. This corresponds to the fact that for this transition system, there is a transition between every pair of states.
-
-More generally, if $\phi _R$ is the reaction formula for the component $C$, then the transition fomula $\Phi _T$ for the corresponding transition system is obtained by existentially quantifying al the input and output variables: $\includes I. \includes O. \Phi _R$
-
-As another example, consider the component *TriggeredCopy* of [figure 2.5]. The only state variable is $x$ of type nat, the initailization formula is $x = 0$, and the reaction formula is 
-$$(in? and out = in and x^' = x + 1) or (~in? and out = 1 and x^' = x)$$
-
-The assumption that when the input event is absent, the component leaves the state unchanged and the ouput is absent, is captured explicitly in the reaction formula as a seperate case. The corresponding transition formula is obtained by existnentially quantifying the input and output variable.
-
-$$ \invludes in, out [(in? and out = in and x^' = x = 1) or (~in? and out = 1 and x^' = x)] $$
-
-This transition formula can be simplified to a logically equivalent formula.
-
-$$ (X^' = x + 1) or (x^' = x)$$
-
-![TriggeredCopy]() TODO
 ---
 
-TODO: Answer
+Initial
+
+    x := 0
+    press := 0
+    mode := off
+
+Reaction
+
+    if mode = off then
+        if press = 1 then mode := on
+    else # mode = on
+        if x >= 10 and press = 1 then x := 1 and mode := off
+        else x := x + 1
+    endif
 
 ---
 ---
 
 ## 3.16
-Consider the symbolic image computation for a transition system with two real-value variables $x$ ad $y$ and transition description given by the formula $x^' = x + 1 or y^' = x$. Suppose the region $A$ is described by the formula $0 \le x \le 4 or y \le 7$. Compute the formula describing the post-image of $A$.
+Consider the symbolic image computation for a transition system with two real-valued variables $x$ ad $y$ and transition description given by the formula $x' = x + 1$ or $y' = x$. Suppose the region $A$ is described by the formula $0 \le x \le 4, y \le 7$. Compute the formula describing the post-image of $A$.
+
 ---
 
-TODO: Answer
+$A'$ {$0 \le x' - 1 \le 4, 0 \le y \le 7$}
+$A'$ {$1 \le x' \le 5, 0 \le y' \le 7$}
+
 ---
 ---
 
 ## 3.17
 Consider a transition system *T* with two integer variables $x$ and $y$. The transitions of the system corresponding to executing the statement:
 
-$$ if (x < y) then x:= x + y else y: = y + 1 $$
+$$ if (x < y) then x:= x + y else y := y + 1 $$
 
-Write the transition forumla over the variables $x, y, x^', and y$ that captures the transition relation of the system. Consider a region $A$ of the above transition systme described by the formula $0 \lt x \lt 5$. Compute the formula describing the post-image of $A$.
+Write the transition formula over the variables $x, y, x', and y$ that captures the transition relation of the system. Consider a region $A$ of the above transition system described by the formula $0 < x < 5$. Compute the formula describing the post-image of $A$.
 ---
-TODO: Answer
+$$ if (x < y) then x' := x + y else y' := y + 1 $$
+
+$A$ {$ 0 < x < 5 $} where $x = 2; y = 3$
+$A'$ {$ 0 < x' - y < 5$}
+$A'$ {$ 0 < x' - 3 < 5$}
+$A'$ {$ 3 < x' < 8$}
+$A'$ {$ 3 < x < 8$}
+
 ---
 ---
 
@@ -96,24 +102,37 @@ TODO: Answer
 Consider the Boolean formula
 $$(x or y) and (~x or z) and (~y or ~z)$$
 
-Draw the ROBDD for this formula with respect to the variable ordering $x<y<z$.
+Draw the ROBDD for this formula with respect to the variable ordering $x < y < z$.
 
-Note: The textbook has an examlpe
+Note: The textbook has an example
 ---
-TODO: Answer
+Initial OBDD
+
+![OBDD](./ROBDD320_1.drawio.png)
+
+Final ROBDD
+
+![ROBDD](./ROBDD320_2.drawio.png)
+
 ---
 ---
 
 ## 4.1
-We want to design an asynchronous adder process *AsyncAdd* with input channels $x_1$ and $x_2$ and an output channel $y$, all of type nat. If the *i*th input message arriving on the channel $x_1$ is $v$ and the *i*th input message arriving on channel $x_2$ is $w$, then the *i*th value output byt the process *AsyncAdd* on its output channel should be $v + w$. Describe all the components of the process *AsyncAdd*
+We want to design an asynchronous adder process *AsyncAdd* with input channels $x_1$ and $x_2$ and an output channel $y$, all of type nat. If the *i*th input message arriving on the channel $x_1$ is $v$ and the *i*th input message arriving on channel $x_2$ is $w$, then the *i*th value output by the process *AsyncAdd* on its output channel should be $v + w$. Describe all the components of the process *AsyncAdd*
 ---
-TODO: Answer
+![AsyncAdd](./AsyncAdd.drawio.png)
+
 ---
 ---
+
 ## 4.2
-We want to design an asynchronous process *Split* that is the dual of *Merge*. The process *Split* has on einput channel *in* and two output channels $out_1$ and $out_2$. The messages receieved on the input channel should be routed to one of the output channels in a nodeteministic manner so that all possible splittings of the input stream are feasable executions. Describe all the components of the desired process *Split*.
+We want to design an asynchronous process *Split* that is the dual of *Merge*. The process *Split* has one input channel *in* and two output channels $out_1$ and $out_2$. The messages received on the input channel should be routed to one of the output channels in a nondeterministic manner so that all possible splittings of the input stream are feasible executions. Describe all the components of the desired process *Split*.
 
-https://microsoft.github.io/ivy/examples/specification.html
+---
 
+![Split](./split.drawio.png)
+
+---
+---
 
 

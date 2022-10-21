@@ -5,25 +5,32 @@ attribute method = mc
 type train_ids = {train_W, train_E}
 type train_mode = {waiting, bridge, gone}
 type light_t = {green, red}
-type bool = {0, 1}
+type bool_t = {0, 1}
 
 var light(X:train_ids) : light_t
 
 object controller = {
 
-    var near(X:train_ids) : bool
+    individual near(X:train_ids) : bool_t
 
     after init {
         light(X:train_ids) := red;
     }
 
     action update_lights = {
-        if near(X:train_ids) = 0 {
-            light(X:train_ids) := red;
+        if near(train_W) = 0 {
+            light(train_W) := red;
         }
-        else if near(Y:train_ids) = 1 {
-            light(X:train_ids) := green;
+        else if near(train_E) = 1 {
+            light(train_E) := green;
+        };
+
+        if near(train_E) = 0 {
+            light(train_E) := red;
         }
+        else if near(train_W) = 1 {
+            light(train_W) := green;
+        };
     }
 
     action arrive(id:train_ids) = {

@@ -9,7 +9,7 @@ type bool_t = {0, 1}
 
 var light(X:train_ids) : light_t
 
-object controller = {
+object controller = { 
 
     individual near(X:train_ids) : bool_t
 
@@ -23,6 +23,7 @@ object controller = {
         }
         else if near(train_E) = 1 {
             light(train_E) := green;
+            light(train_W) := red;
         };
 
         if near(train_E) = 0 {
@@ -30,6 +31,7 @@ object controller = {
         }
         else if near(train_W) = 1 {
             light(train_W) := green;
+            light(train_E) := red;
         };
     }
 

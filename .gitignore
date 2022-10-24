@@ -53,3 +53,5 @@ dkms.conf
 
 # Word temps
 .*.docx*
+
+**/CyberPhysicalBox

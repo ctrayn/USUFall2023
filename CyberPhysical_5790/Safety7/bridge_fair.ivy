@@ -1,0 +1,123 @@
+#lang ivy1.7
+
+attribute method = mc
+
+type train_ids = {train_W, train_E}
+type train_mode = {waiting, bridge, gone}
+type light_t = {green, red}
+type bool_t = {0, 1}
+
+var light(X:train_ids) : light_t
+
+object controller = { 
+
+    individual near(X:train_ids) : bool_t
+
+    after init {
+        light(X:train_ids) := red;
+    }
+
+    action update_lights = {
+        if near(train_W) = 0 {
+            light(train_W) := red;
+        }
+        else if near(train_E) = 1 {
+            light(train_E) := green;
+            light(train_W) := red;
+        };
+
+        if near(train_E) = 0 {
+            light(train_E) := red;
+        }
+        else if near(train_W) = 1 {
+            light(train_W) := green;
+            light(train_E) := red;
+        };
+    }
+
+    action arrive(id:train_ids) = {
+        near(id) := 1;
+        call update_lights;
+    }
+
+    action leave(id:train_ids) = {
+        near(id) := 0;
+        call update_lights;
+    }
+}
+
+module train(id:train_ids) = {
+    individual mode : train_mode
+
+    after init {
+        mode := gone;
+    }
+
+    action move = {
+        if light(id) = green & mode = waiting {
+            mode := bridge;
+            call controller.update_lights;
+        }
+        else {
+            if mode = gone {
+                if * {
+                    mode := gone;
+                }
+                else {
+                    mode := waiting;
+                    call controller.arrive(id);
+                }
+            }
+            else {
+                if mode = bridge {
+                    if * {
+                        mode := bridge;
+                    }
+                    else {
+                        mode := gone;
+                        call controller.leave(id);
+                    }
+                }
+            }
+        }
+    }
+}
+instance train_inst(X:train_ids) : train(X)
+export train_inst(X:train_ids).move
+
+type monitor_state = {zero,one,two,three}
+
+object westfairmonitor = {
+    individual state : monitor_state
+
+    after init {
+        state := zero;
+    }
+
+    action west_arrive = {
+        state := one;
+    }
+    # execute west_arrive after controller.arrive(train_W)
+
+    action west_green = {
+        if light(train_E) = green {
+            state := zero;
+        }
+    }
+    execute west_green after controller.update_lights
+
+    action east_leave = {
+        if state = one {
+            state := two;
+        }
+        else {
+            if state = two {
+                state := three;
+            }
+        }
+    }
+    # execute east_leave after controller.leave(train_E)
+}
+
+# invariant westfairmonitor.state ~= three
+invariant ~(train_inst(train_W).mode = bridge & train_inst(train_E).mode = bridge) 

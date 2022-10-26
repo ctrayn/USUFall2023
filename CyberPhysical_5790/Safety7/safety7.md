@@ -34,4 +34,4 @@ The bridge_fair.ivy file does run with
 
     Ok
 
-as the output if you comment out lines 100 and 119.
+as the output, if you comment out lines 100 and 119.

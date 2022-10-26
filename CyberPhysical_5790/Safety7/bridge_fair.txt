@@ -1,0 +1,3 @@
+Isolate this:
+
+bridge_fair.ivy: line 100: error: mixin westfairmonitor.west_arrive has wrong number of input parameters for controller.arrive

@@ -1,0 +1,55 @@
+% Options for packages loaded elsewhere
+\documentclass[
+$if(fontsize)$
+  $fontsize$,
+$endif$
+$for(classoption)$
+  $classoption$$sep$,
+$endfor$
+]{$documentclass$}
+$if(fontfamily)$
+\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+$else$
+\usepackage{lmodern}
+$endif$
+$if(linestretch)$
+\usepackage{setspace}
+$endif$
+\usepackage{amssymb,amsmath}
+\usepackage{xcolor}
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+\usepackage{tikz}
+\usetikzlibrary{calc,shapes,shapes.geometric,shapes.symbols,arrows,intersections,calc,decorations,backgrounds,patterns,}
+\usepackage{pgfplots}
+
+\pagestyle{empty}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment[]{tikzpicture}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \begin{$axis$}[
+      grid=both,
+      title=$title$,%
+      xlabel=$xlabel$,%
+      ylabel=$ylabel$,%
+      width=$width$,%
+      height=$height$,%
+      $if(xmin)$xmin=$xmin$,$endif$%
+      $if(xmax)$xmax=$xmax$,$endif$%
+      $if(ymin)$ymin=$ymin$,$endif$%
+      $if(ymax)$ymax=$ymax$,$endif$%
+    ]
+    $for(plot)$
+      \addplot[$plot.options$] table[x index=$plot.x$,y index=$plot.y$] {$plot.file$};
+      \addlegendentry{$plot.name$};
+    $endfor$
+  \end{$axis$}
+\end{tikzpicture}
+$body$
+
+\end{document}

@@ -1,0 +1,55 @@
+#lang ivy1.7
+
+attribute method = mc
+
+type id = { N0, N1 }
+type mode_t = { START, DOOR, WAIT, INNER, CRIT }
+# line number   1      4     5     8      10
+type flag_t = {0, 1, 2, 3, 4}
+
+module process(X:id) = {
+    individual mode : mode_t
+    individual flag : flag_t
+
+    after init {
+        mode := START;
+        flag := 0;
+    }
+
+    action move {
+        if mode = START {
+            # TODO Add a switch case here
+            flag := 1;
+            if (flag(Y:id) < 3) {
+                flag := 3;
+                mode := DOOR;
+            }
+        } else { if mode = DOOR {
+            if process(Y:id).flag = 1 {
+                flag := 2;
+                mode := WAIT;
+            }
+            else {
+                mode := 4;
+                mode := INNER;
+            }
+        } else { if mode = WAIT {
+            if process(Y:id).flag = 4 {
+                mode := 4;
+                mode := INNER;
+            }
+        } else { if mode = INNER {
+            if ~process(Y:id).flag >= 2 {
+                mode := CRITICAL;
+            }
+        } else { if mode = CRITICAL {
+            if ~process(Y:id).flag = 2 {
+                flag := 0;
+                mode := START;
+            }
+        }
+        }}}}
+    }
+}
+
+invariant ~(process(X:id).mode = CRITICAL && process(Y:id) = CRITICAL)

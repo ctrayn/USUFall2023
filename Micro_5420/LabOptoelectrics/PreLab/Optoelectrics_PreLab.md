@@ -4,7 +4,7 @@ A02107892
 
 ECE 5420
 
-# Lab Optoelectronics
+# Optoelectronics Pre Lab
 
 ## DC Operating Point: Transmit Side
 

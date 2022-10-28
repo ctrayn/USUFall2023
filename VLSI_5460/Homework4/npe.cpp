@@ -19,16 +19,19 @@ bool check_balloting(string NPE) {
 
         if (current == 'V' || current == 'v' || current == 'H' || current == 'h') {
             num_operators++;
-            continue;
         }
-
-        if (find(operands.begin(), operands.end(), current) != operands.end()) {
+        else if (find(operands.begin(), operands.end(), current) != operands.end()) {
             cout << "Found repeated operand: " << current << endl;
             return false;   //found the same operand twice in the string
         }
         else {
             num_operands++;
             operands.push_back(current);
+        }
+
+        if (num_operators >= num_operands) {
+            // cout << "Too many operators in subtree up to idx " << i << endl;
+            return false;
         }
     }
 
@@ -37,24 +40,32 @@ bool check_balloting(string NPE) {
         return true;
     }
     else {
-        cout << "Too many operators" << endl;
+        // cout << "Too many operators" << endl;
         return false;
     }
 }
 
 float npe_cost(string NPE, vector<node_t> nodes) {
-    cout << "Starting cost for NPE " << NPE << endl;
+    // cout << "Starting cost for NPE " << NPE << endl;
     vector<node_t> stack = {};
     node_t first;
     node_t second;
     node_t sub_tree;
     pair_t orient;
 
+    if (!check_balloting(NPE)) {
+        // cout << "Not a valid NPE" << endl;
+        return __FLT_MAX__;
+    }
+    // else {
+    //     cout << "Valid NPE" << endl;
+    // }
+
     int npe_size = NPE.size();
     char current;
     for (int i = 0; i < npe_size; i++) {
         current = NPE[i];
-        // printf("Current char %c ", current);
+        // printf("Current char %c\n", current);
 
         if (current == 'V' || current == 'v') { //Vertical cut
             // printf("Vertical ");
@@ -168,7 +179,7 @@ float npe_cost(string NPE, vector<node_t> nodes) {
         min_area = min(min_area, area);
         // printf("Orientation %f-%f Area %f\n", final.orientations[i].height, final.orientations[i].width, area);
     }
-    printf("Min Area: %f\n", min_area);
+    // printf("Min Area: %f\n", min_area);
     
     return min_area;
 }

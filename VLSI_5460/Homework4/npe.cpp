@@ -55,7 +55,7 @@ float npe_cost(string NPE, vector<node_t> nodes) {
 
     if (!check_balloting(NPE)) {
         // cout << "Not a valid NPE" << endl;
-        return __FLT_MAX__;
+        return 10000;
     }
     // else {
     //     cout << "Valid NPE" << endl;

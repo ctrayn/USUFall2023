@@ -1,3 +1,11 @@
+#include "anneal.h"
+#include "npe.h"
+#include "constants.h"
+#include "node.h"
+#include <vector>
+#include <iostream>
+#include <string>
+using namespace std;
 
 int get_rand_operand_idx(string E, vector<node_t> nodes) {
     int rand_max = 1000;
@@ -118,7 +126,7 @@ string make_move(string E, vector<node_t> nodes) {
 }
 
 string anneal(const string E0, vector<node_t> nodes) {
-    std::cout << "Anneal: " << E0 << endl;
+    // std::cout << "Anneal: " << E0 << endl;
     string E = E0;
     string Best = E0;
     string NewE = E0;

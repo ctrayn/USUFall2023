@@ -1,9 +1,11 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <string>
 #include "node.h"
 #include "npe.h"
 #include "constants.h"
+#include "anneal.h"
 using namespace std;
 
 int main(int argc, char *argv[]) {

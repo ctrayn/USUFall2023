@@ -61,23 +61,15 @@ string make_move(string E, vector<node_t> nodes) {
     int M = abs((rand() * 10) % 3);
     switch(M) {
         case 0: //Two operands
-            // std::cout << "Operands: " << E << endl;
             first = get_rand_operand_idx(NewE, nodes);
-            // cout << "First " << first << endl;
             second = -1;
             while ((second < 0) && (second != first)) {
-                // cout << "Trying Second" << endl;
                 second = get_rand_operand_idx(NewE, nodes);
             }
-            // cout << "Second " << second << endl;
             swap(NewE[first], NewE[second]);
-            // std::cout << "NewE:     " << NewE << endl;
             break;
 
         case 1: //Two operators
-            // std::cout << "Operators: " << E << endl;
-            // C = abs((rand() * 100) % (int)(NewE.size() / 2));
-            // for(int i = 0; i < NewE.size() && C > 0; i++) {
             rand_idx = abs((rand() * 100) % (int)(NewE.size() / 2));
             for(int i = rand_idx; i < NewE.size(); i++) {
                 if (NewE[i] == 'V') {
@@ -89,17 +81,14 @@ string make_move(string E, vector<node_t> nodes) {
                     break;
                 }
             }
-            // std::cout << "NewE:      " << NewE << endl;
             break;
 
         case 2: //Operands and operators
-            // std::cout << "Mixed: " << E << endl;
             done = false;
             pos = 0;
             while (!done) {
                 //rand starting pos
                 pos = abs((rand() * 100) % (int)(E.size() / 2));
-                // cout << "Pos: " << pos << endl;
                 if (pos < 2) {
                     pos = 2;    //Can't have the first two characters not be operands
                 }
@@ -115,7 +104,6 @@ string make_move(string E, vector<node_t> nodes) {
                     swap(NewE[i], NewE[i + 1]);
                 }
             }
-            // std::cout << "NewE:  " << NewE << endl;
             break;
 
         default:
@@ -125,14 +113,35 @@ string make_move(string E, vector<node_t> nodes) {
     return NewE;
 }
 
+float get_init_temp(string E0, vector<node_t> nodes) {
+    const int NUM_AVG = 10;
+    float initial_cost = npe_cost(E0, nodes);
+    int count = 0;
+    string NewE;
+    float summation;
+    float NewCost;
+
+    //Get 10 uphill moves
+    while(count < NUM_AVG) {
+        NewE = make_move(E0, nodes);
+        NewCost = npe_cost(NewE, nodes) - initial_cost;
+        if (NewCost > 0) {
+            summation += NewCost;
+            count++;
+        }
+    }
+    summation /= NUM_AVG;   //Get the average of the differences
+    float initial_temp = -summation / log(P); //log is the natural log
+    return initial_temp;
+}
+
 string anneal(const string E0, vector<node_t> nodes) {
-    // std::cout << "Anneal: " << E0 << endl;
     string E = E0;
     string Best = E0;
     string NewE = E0;
     float T = t0;
     if (T < 0) {
-        T = 1000000;   //TODO This should be calculated into a large number
+        T = get_init_temp(E0, nodes);
     }
     int uphill = 0;
     int MT = 0;
@@ -140,35 +149,27 @@ string anneal(const string E0, vector<node_t> nodes) {
     bool out_of_time = false;
     int delta_cost = 0;
 
-    while ((safe_div(Reject, MT) > 0.95) && (T > epsilon) && !out_of_time) {
-        std::cout << "T: " << T << endl;
+    while ((safe_div(Reject, MT) > 0.95) && (T >= epsilon) && !out_of_time) {
         MT = uphill = Reject = 0;
-        // E = Best;
         NewE = E;
         while ((uphill <= nmoves) && (MT <= 2 * nmoves)) {
+            //make a change in the NPE string
             NewE = make_move(NewE, nodes);
+            //Evaluate the move
             MT++;
-            // cout << "Evaluating" << endl;
             float new_cost = npe_cost(NewE, nodes);
-            // cout << "New cost: " << new_cost << endl;
             float old_cost = npe_cost(E, nodes);
-            // cout << "Old cost: " << old_cost << endl;
             delta_cost = npe_cost(NewE, nodes) - npe_cost(E, nodes);
-            // cout << "delta_cost " << delta_cost << endl;
-            //TODO: Track chip ratio
             if ((delta_cost < 0) || (rand() < exp(-delta_cost / T))) {
                 if (delta_cost > 0) { uphill++; }
                 //Accept NewE
-                cout << "Accept NewE: " << NewE << endl;
                 E = NewE;
                 if (npe_cost(E, nodes) < npe_cost(Best, nodes)) {
                     //Save if is best so far
-                    cout << "Best: " << E << endl;
                     Best = E;
                 }
             }
             else {
-                // cout << "Rejected: " << NewE << endl;
                 Reject++;
             }
         }

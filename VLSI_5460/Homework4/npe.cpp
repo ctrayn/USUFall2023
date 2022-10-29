@@ -17,18 +17,22 @@ bool check_balloting(string NPE) {
     for (int i = 0; i < size; i++) {
         current = NPE[i];
 
+        //If it's an operator
         if (current == 'V' || current == 'v' || current == 'H' || current == 'h') {
             num_operators++;
         }
+        //Check for repeated operand names
         else if (find(operands.begin(), operands.end(), current) != operands.end()) {
             cout << "Found repeated operand: " << current << endl;
             return false;   //found the same operand twice in the string
         }
+        //valid operand
         else {
             num_operands++;
             operands.push_back(current);
         }
 
+        //Check if has the correct number of operands/operators
         if (num_operators >= num_operands) {
             // cout << "Too many operators in subtree up to idx " << i << endl;
             return false;
@@ -45,7 +49,7 @@ bool check_balloting(string NPE) {
     }
 }
 
-float npe_cost(string NPE, vector<node_t> nodes) {
+pair_t npe_cost_ratio(string NPE, vector<node_t> nodes) {
     // cout << "Starting cost for NPE " << NPE << endl;
     vector<node_t> stack = {};
     node_t first;
@@ -53,9 +57,13 @@ float npe_cost(string NPE, vector<node_t> nodes) {
     node_t sub_tree;
     pair_t orient;
 
+    //Check if the NPE is valid
     if (!check_balloting(NPE)) {
         // cout << "Not a valid NPE" << endl;
-        return 10000;
+        pair_t bad_pair;
+        bad_pair.width = 100;
+        bad_pair.height = 100;
+        return bad_pair;
     }
     // else {
     //     cout << "Valid NPE" << endl;
@@ -63,12 +71,11 @@ float npe_cost(string NPE, vector<node_t> nodes) {
 
     int npe_size = NPE.size();
     char current;
-    for (int i = 0; i < npe_size; i++) {
+    for (int i = 0; i < npe_size; i++) {        //For each characeter in the string
         current = NPE[i];
         // printf("Current char %c\n", current);
 
         if (current == 'V' || current == 'v') { //Vertical cut
-            // printf("Vertical ");
             //take two off the stack and combine orientations
             first = stack.back();
             stack.pop_back();
@@ -78,37 +85,20 @@ float npe_cost(string NPE, vector<node_t> nodes) {
             
             int f_size = first.orientations.size();
             int s_size = second.orientations.size();
-            // printf("\nFirst: %c\n", first.id[0]);
-            // for (int i = 0; i < first.orientations.size(); i++) {
-            //     printf("\t");
-            //     first.orientations[i].print('\n');
-            // }
-            // printf("Second: %c\n", second.id[0]);
-            // for (int i = 0; i < second.orientations.size(); i++) {
-            //     printf("\t");
-            //     second.orientations[i].print('\n');
-            // }
 
-            // cout << "Adding node to stack " << sub_tree.id << " with orientations: " << endl;
+            //Add all possible orientations of these two nodes to the new subtree node
             for (int f = 0; f < f_size; f++) {
                 for (int s = 0; s < s_size; s++) {
                     orient.height = max(first.orientations[f].height, second.orientations[s].height);
                     orient.width = first.orientations[f].width + second.orientations[s].width;
-                    // printf("First width %f Second width %f, Orient width %f\n", first.orientations[f].width, second.orientations[s].width, orient.width);
                     sub_tree.orientations.push_back(orient);
-                    // orient.print('\n');
                 }
             }
+            //Remove excess orientations
             sub_tree.trim_orientations();
-            // printf("\n");
-            // for (int i = 0; i < sub_tree.orientations.size(); i++) {
-                // printf("i %d\t", i);
-                // sub_tree.orientations[i].print('\n');
-            // }
             stack.push_back(sub_tree);
         }
         else if (current == 'H' || current == 'h') {    //Horizontal cut
-            // printf("Horizontal ");
             //take two off the stack and combine orientations
             first = stack.back();
             stack.pop_back();
@@ -116,46 +106,27 @@ float npe_cost(string NPE, vector<node_t> nodes) {
             stack.pop_back();
             sub_tree = node_t(second.id + first.id + current);
 
-            // cout << "Adding node to stack " << sub_tree.id << " with orientations: ";
             int f_size = first.orientations.size();
             int s_size = second.orientations.size();
-            // printf("\nFirst: %c\n", first.id[0]);
-            // for (int i = 0; i < first.orientations.size(); i++) {
-                // printf("\t");
-            //     first.orientations[i].print('\n');
-            // }
-            // printf("Second: %c\n", second.id[0]);
-            // for (int i = 0; i < second.orientations.size(); i++) {
-            //     printf("\t");
-            //     second.orientations[i].print('\n');
-            // }
             
+            //Add all possible orientations of these two nodes to the new subtree node
             for (int f = 0; f < f_size; f++) {
                 for (int s = 0; s < s_size; s++) {
                     orient.height = first.orientations[f].height + second.orientations[s].height;
-                    // printf("First height %f Second Height %f, Orient Height %f\n", first.orientations[f].height, second.orientations[s].height, orient.height);
                     orient.width = max(first.orientations[f].width, second.orientations[s].width);
                     sub_tree.orientations.push_back(orient);
-                    // orient.print('\n');
                 }
             }
+            //Remove excess orientations
             sub_tree.trim_orientations();
-            // printf("\n");
-            // for (int i = 0; i < sub_tree.orientations.size(); i++) {
-                // printf("i %d\t", i);
-                // sub_tree.orientations[i].print('\n');
-            // }
             stack.push_back(sub_tree);
         }
         else {
-            // printf("Operand ");
             // Is an operand, put it onto the stack
             int nodes_size = nodes.size();
             bool found = false;
-            for (int n = 0; n < nodes_size; n++) {
-                // cout << "N " << n << " node " << nodes[n].id << endl;
+            for (int n = 0; n < nodes_size; n++) {  //find the operand node
                 if (nodes[n].id[0] == current) {
-                    // printf(" Found");
                     stack.push_back(nodes[n]);
                     found = true;
                     break;
@@ -163,23 +134,36 @@ float npe_cost(string NPE, vector<node_t> nodes) {
             }
             if (!found) {
                 // printf("Error: node not found: %c\n", current);
-                return -1;
+                pair_t bad_pair;
+                bad_pair.height = 1;
+                bad_pair.width = -1;
+                return bad_pair;
             }
         }
-        // printf("\n");
     }
 
     node_t final = stack.back();
     stack.pop_back();
     assert(stack.empty());
 
+    //Get the minimum area from the possible orientations of the final tree
     float min_area = final.orientations[0].height * final.orientations[0].width;
+    pair_t min_pair = {final.orientations[0].width, final.orientations[0].height};
     for (int i = 0; i < final.orientations.size(); i++) {
         float area = final.orientations[i].height * final.orientations[i].width;
-        min_area = min(min_area, area);
-        // printf("Orientation %f-%f Area %f\n", final.orientations[i].height, final.orientations[i].width, area);
+        if (area < min_area) {
+            min_pair.height = final.orientations[i].height;
+            min_pair.width  = final.orientations[i].width;
+            min_area = area;
+        }
     }
-    // printf("Min Area: %f\n", min_area);
-    
-    return min_area;
+    //Return the minimum area pair
+    return min_pair;
+}
+
+/* Get the minimum area pair and turn it into a single area */
+float npe_cost(string NPE, vector<node_t> nodes) {
+    pair_t pair = npe_cost_ratio(NPE, nodes);
+    float area = pair.height * pair.width;
+    return area;
 }

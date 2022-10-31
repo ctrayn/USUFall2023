@@ -19,12 +19,12 @@ module process(X:proc_id) = {
     action move = {
         if mode = start {   # Switch case
             flag := 1;
-            if proc_inst(Y:proc_id).flag < 3 {
+            if some y:proc_id. proc_inst(y).flag < 3 {
                 flag := 3;
                 mode := door;
             }
         } else { if mode = door {
-            if proc_inst(Y:proc_id).flag = 1 {
+            if some y:proc_id. proc_inst(y).flag = 1 {
                 flag := 2;
                 mode := wait;
             }
@@ -33,16 +33,16 @@ module process(X:proc_id) = {
                 mode := inner;
             }
         } else { if mode = wait {
-            if proc_inst(Y:proc_id).flag = 4 {
+            if some y:proc_id. proc_inst(y).flag = 4 {
                 mode := 4;
                 mode := inner;
             }
         } else { if mode = inner {
-            if ~proc_inst(Y:proc_id).flag >= 2 {
+            if some y:proc_id. ~proc_inst(y).flag >= 2 {
                 mode := crit
             }
         } else { if mode = crit {
-            if ~proc_inst(Y:proc_id).flag = 2 {
+            if some y:proc_id. ~proc_inst(y).flag = 2 {
                 flag := 0;
                 mode := start;
             }

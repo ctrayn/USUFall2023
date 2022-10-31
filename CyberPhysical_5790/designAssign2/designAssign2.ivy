@@ -2,54 +2,55 @@
 
 attribute method = mc
 
-type id = { N0, N1 }
-type mode_t = { START, DOOR, WAIT, INNER, CRIT }
-# line number   1      4     5     8      10
+type proc_id = {n0, n1}
+type mode_t = {start, door, wait, inner, crit}
+#line number   1      4     5     8      10
 type flag_t = {0, 1, 2, 3, 4}
 
-module process(X:id) = {
+module process(X:proc_id) = {
     individual mode : mode_t
     individual flag : flag_t
 
     after init {
-        mode := START;
-        flag := 0;
+        mode := start;
+        flag := 1;
     }
 
-    action move {
-        if mode = START {
-            # TODO Add a switch case here
+    action move = {
+        if mode = start {   # Switch case
             flag := 1;
-            if (flag(Y:id) < 3) {
+            if proc_inst(Y:proc_id).flag < 3 {
                 flag := 3;
-                mode := DOOR;
+                mode := door;
             }
-        } else { if mode = DOOR {
-            if process(Y:id).flag = 1 {
+        } else { if mode = door {
+            if proc_inst(Y:proc_id).flag = 1 {
                 flag := 2;
-                mode := WAIT;
+                mode := wait;
             }
             else {
                 mode := 4;
-                mode := INNER;
+                mode := inner;
             }
-        } else { if mode = WAIT {
-            if process(Y:id).flag = 4 {
+        } else { if mode = wait {
+            if proc_inst(Y:proc_id).flag = 4 {
                 mode := 4;
-                mode := INNER;
+                mode := inner;
             }
-        } else { if mode = INNER {
-            if ~process(Y:id).flag >= 2 {
-                mode := CRITICAL;
+        } else { if mode = inner {
+            if ~proc_inst(Y:proc_id).flag >= 2 {
+                mode := crit
             }
-        } else { if mode = CRITICAL {
-            if ~process(Y:id).flag = 2 {
+        } else { if mode = crit {
+            if ~proc_inst(Y:proc_id).flag = 2 {
                 flag := 0;
-                mode := START;
+                mode := start;
             }
-        }
-        }}}}
+        }}}}}
     }
 }
 
-invariant ~(process(X:id).mode = CRITICAL && process(Y:id) = CRITICAL)
+instance proc_inst(X:proc_id) : process(X)
+export proc_inst(X:proc_id).move
+
+invariant ~(proc_inst(X:proc_id).mode = crit & proc_inst(Y:proc_id).mode = crit)

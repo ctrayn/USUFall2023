@@ -7,7 +7,7 @@ type mode_t = {start, door, wait, inner, crit}
 # line number  1      4     5     8      10
 type flag_t = {0, 1, 2, 3, 4}
 
-instance flag(X:proc_id) : flag_t(X)
+instance flag(X:proc_id) : flag_t
 
 module process(x:proc_id) = {
     individual mode : mode_t

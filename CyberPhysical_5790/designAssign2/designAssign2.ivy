@@ -7,52 +7,45 @@ type mode_t = {start, door, wait, inner, crit}
 # line number  1      4     5     8      10
 type flag_t = {0, 1, 2, 3, 4}
 
-instance flag(X:proc_id) : flag_t
+var flag(X:proc_id) : flag_t
+var process(X:proc_id) : mode_t
 
-module process(x:proc_id) = {
-    individual mode : mode_t
-    individual flag : flag_t
-
-    after init {
-        mode := start;
-        flag(x) := 1;
-    }
-
-    action move = {
-        if mode = start {   # Switch case
-            flag := 1;
-            if some y:proc_id. flag(y) = 0 | flag(y) = 1 | flag(y) = 2 {
-                flag := 3;
-                mode := door;
-            }
-        } else { if mode = door {
-            if some y:proc_id. proc_inst(y).flag = 1 {
-                flag := 2;
-                mode := wait;
-            }
-            else {
-                mode := 4;
-                mode := inner;
-            }
-        } else { if mode = wait {
-            if some y:proc_id. proc_inst(y).flag = 4 {
-                mode := 4;
-                mode := inner;
-            }
-        } else { if mode = inner {
-            if some y:proc_id. ~proc_inst(y).flag >= 2 {
-                mode := crit
-            }
-        } else { if mode = crit {
-            if some y:proc_id. ~proc_inst(y).flag = 2 {
-                flag := 0;
-                mode := start;
-            }
-        }}}}}
-    }
+after init {
+    flag(X:proc_id) := 1;
+    process(X:proc_id) := start;
 }
 
-instance proc_inst(X:proc_id) : process(X)
-export proc_inst(X:proc_id).move
+export action move(x:proc_id) = {
+    if process(x) = start {   # Switch case
+        flag(x) := 1;
+        if ~exists Y:proc_id. flag(Y) = 3 | flag(Y) = 4 {
+            flag(x) := 3;
+            process(x) := door;
+        }
+    } else { if process(x) = door {
+        if some y:proc_id. flag(y) = 1 {
+            flag(x) := 2;
+            process(x) := wait;
+        }
+        else {
+            flag(x) := 4;
+            process(x) := inner;
+        }
+    } else { if process(x) = wait {
+        if some y:proc_id. flag(y) = 4 {
+            flag(x) := 4;
+            process(x) := inner;
+        }
+    } else { if process(x) = inner {
+        if ~exists Y:proc_id. flag(Y) = 3 | flag(Y) = 4 {
+            process(x) := crit
+        }
+    } else { if process(x) = crit {
+        if ~exists Y:proc_id. flag(Y) = 2 | flag(Y) = 3 {
+            flag(x) := 0;
+            process(x) := start;
+        }
+    }}}}}
+}
 
-invariant ~(proc_inst(X:proc_id).mode = crit & proc_inst(Y:proc_id).mode = crit)
+invariant ~(process(X:proc_id) = crit & process(Y:proc_id) = crit)

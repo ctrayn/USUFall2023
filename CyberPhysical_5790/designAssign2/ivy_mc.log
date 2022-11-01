@@ -1,11 +1,2 @@
 
 instantiations:
-new state: 2:flag_t < 2
-new state: 2:flag_t < 0
-new state: 2:flag_t < 1
-new state: 1:flag_t < 3
-new state: 3:flag_t < 3
-new state: 2:flag_t < 4
-new state: 0:flag_t < 3
-new state: 2:flag_t < 3
-new state: 4:flag_t < 3

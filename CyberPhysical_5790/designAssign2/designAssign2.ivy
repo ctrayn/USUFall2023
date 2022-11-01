@@ -4,22 +4,24 @@ attribute method = mc
 
 type proc_id = {n0, n1}
 type mode_t = {start, door, wait, inner, crit}
-#line number   1      4     5     8      10
+# line number  1      4     5     8      10
 type flag_t = {0, 1, 2, 3, 4}
 
-module process(X:proc_id) = {
+instance flag(X:proc_id) : flag_t(X)
+
+module process(x:proc_id) = {
     individual mode : mode_t
     individual flag : flag_t
 
     after init {
         mode := start;
-        flag := 1;
+        flag(x) := 1;
     }
 
     action move = {
         if mode = start {   # Switch case
             flag := 1;
-            if not proc_inst(Y:proc_id) <= 3 {
+            if some y:proc_id. flag(y) = 0 | flag(y) = 1 | flag(y) = 2 {
                 flag := 3;
                 mode := door;
             }

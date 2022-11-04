@@ -1,0 +1,2 @@
+default via 129.123.5.254 dev eno1 proto dhcp metric 100 
+129.123.4.0/23 dev eno1 proto kernel scope link src 129.123.5.10 metric 100 

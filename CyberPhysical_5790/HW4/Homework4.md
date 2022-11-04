@@ -46,7 +46,9 @@ Consider the asynchronous compositions *AsyncNot* | *AsyncNotEnv* and argue that
 
 ---
 
-//TODO
+![ex4.5](./ex4.5.drawio.png)
+
+This will guraruntee that (*AsyncNot*.mode $\neq$ *hazard*) is an invariant becuase this waits until the output has changed to update the input. Whenever the output is changed, *AsyncNot* is in a stable state and we wait for it to be in a stable state again before updating the input.
 
 ---
 ---

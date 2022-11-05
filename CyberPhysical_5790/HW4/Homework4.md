@@ -27,7 +27,13 @@ obtained by connecting two instances of the process *Merge*. Show the "compiled"
 
 ---
 
-//TODO
+Two Merge processes, I'm still a little confused about what the question is asking me to do, so the below picture is what I'm assuming I'm being asked to do.
+
+![MergeStart](./ex4.4_start.drawio.png)
+
+Compiled Answer
+
+![MergeCompile](./ex4.4.drawio.png)
 
 ---
 ---

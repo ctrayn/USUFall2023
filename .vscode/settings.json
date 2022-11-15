@@ -12,5 +12,24 @@
     "cSpell.words": [
         "CDMA",
         "Mult"
-    ]
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#00476d",
+        "activityBar.background": "#00476d",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#000000",
+        "activityBarBadge.foreground": "#e7e7e7",
+        "commandCenter.border": "#e7e7e799",
+        "sash.hoverBorder": "#00476d",
+        "statusBar.background": "#00263a",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#00476d",
+        "statusBarItem.remoteBackground": "#00263a",
+        "statusBarItem.remoteForeground": "#e7e7e7",
+        "titleBar.activeBackground": "#00263a",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.inactiveBackground": "#00263a99",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    }
 }

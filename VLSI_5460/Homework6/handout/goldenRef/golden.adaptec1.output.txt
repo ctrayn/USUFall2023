@@ -1,0 +1,89 @@
+SimpleGR 1.1 (64-bit) Compiled on Mon Nov  2 16:14:00 MST 2015 with GCC 4.4.7
+Reading from `adaptec1.simple.gr' ...
+grid size 324x324
+read in 76927 GR nets from 117104 nets design
+CPU time: 0.19397 seconds
+
+SimpleGR parameters:
+Design file to read:       adaptec1.simple.gr
+Maximum RRR iterations:    20
+Max RRR runtime:           300 seconds
+Maximum greedy iterations: 1
+Save solution to file:     'golden.adaptec1.sol.txt'
+
+[Initial routing starts]
+phase 1. routing flat GR nets
+scheduled number of workloads : 53496
+global router has finished 30%: 47611 left.
+global router has finished 50%: 36912 left.
+global router has finished 70%: 26213 left.
+global router has finished 90%: 15513 left.
+53496 flat GR nets routed
+CPU time: 0.309952 seconds 
+phase 2. routing remaining GR nets
+scheduled number of workloads : 23431
+global router has finished 30%: 20853 left.
+global router has finished 50%: 16167 left.
+global router has finished 70%: 11481 left.
+global router has finished 90%: 6794 left.
+routed 23431 GR nets
+[Initial routing ends]
+
+GR Stats :
+ nets routed 76927 (100%)
+ total length for routed nets 647976
+ total number of vias 108148
+ total wire length 972420
+ number of overflowing edges is 0 (0%)
+ max overflow is 0
+ total overflow is 0
+ avg overflow is 0
+ CPU time: 3.9114 seconds
+
+[Iterative Rip-up and Re-Route starts]
+Performing at most 20 rip-up and re-route iteration(s)
+No more GR nets to rip up, quitting
+[Iterative Rip-up and Re-Route ends]
+
+GR Stats :
+ nets routed 76927 (100%)
+ total length for routed nets 647976
+ total number of vias 108148
+ total wire length 972420
+ number of overflowing edges is 0 (0%)
+ max overflow is 0
+ total overflow is 0
+ avg overflow is 0
+ CPU time: 3.9134 seconds
+
+[Greedy improvement routing starts]
+performing 1 greedy improvement iteration(s)
+
+examining 76927 GR nets 
+scheduled number of workloads : 76927
+global router has finished 30%: 68465 left.
+global router has finished 50%: 53079 left.
+global router has finished 70%: 37694 left.
+global router has finished 90%: 22308 left.
+after greedy improvement iteration 1
+total length for routed nets 647976
+total number of vias 107852
+total wire length 971532
+number of overflowing edges is 0 (0%)
+total overflow is 0
+avg overflow is 0
+CPU time: 5.80112 seconds
+[Greedy improvement routing ends]
+
+GR Stats :
+ Final nets routed 76927 (100%)
+ Final total length for routed nets 647976
+ Final total number of vias 107852
+ Final total wire length 971532
+ Final number of overflowing edges is 0 (0%)
+ Final max overflow is 0
+ Final total overflow is 0
+ Final avg overflow is 0
+ Final CPU time: 5.80212 seconds
+
+Writing `golden.adaptec1.sol.txt' ... done

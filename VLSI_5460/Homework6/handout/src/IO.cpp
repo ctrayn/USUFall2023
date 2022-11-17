@@ -40,7 +40,7 @@ void SimpleGR::parseInput()
 
   string textstring;
 
-  // FIXME: comment purpose of the following 3 lines
+  // The following three lines read a line in the open infile, expects to find the string "grid" or exits, and then read the subsequent data into the specified variables
   infile>>textstring;
   expect(textstring, string("grid"));
   infile>>gcellArrSzX>>gcellArrSzY>>numLayers;
@@ -51,7 +51,7 @@ void SimpleGR::parseInput()
 
   cout<<"grid size "<<gcellArrSzX<<"x"<<gcellArrSzY<<endl;
 
-  //FIXME: comment on what is loaded here till the next 'checkpoint'
+  //The following reads in the data of how many wire tracks are available per layer, the first block for vertical capacity and the second block for horizontal capacity
   infile>>textstring;
   expect(textstring, string("vertical"));
   infile>>textstring;
@@ -73,7 +73,7 @@ void SimpleGR::parseInput()
   }
   // checkpoint
 
-  //FIXME: comment on what is loaded here till the next 'checkpoint'
+  //Next what is read in is the number of wire tracks demanded by any net to route over an edge of a specified layer
   infile>>textstring;
   expect(textstring, string("minimum"));
   infile>>textstring;
@@ -97,8 +97,9 @@ void SimpleGR::parseInput()
   }
   // checkpoint
 
-  // FIXME: leave a comment here on how to use minWidths and minSpacings to
-  //         get routing demand of each routing segment on a given layer.
+  // To get the routing demand of each routing segment on a given layer:
+  //    Use the index into minWidths and minSpacings to indicate which layer is being calculated
+  //    Then add them together get the routing demands
 
   // Read in via spacing, but it won't be used
   infile>>textstring;
@@ -116,7 +117,8 @@ void SimpleGR::parseInput()
   halfWidth = gcellWidth>>1;
   halfHeight = gcellHeight>>1;
 
-  //FIXME: comment on what is loaded here till the next 'checkpoint'
+  //  The num net tells how many nets are in the design
+  //    Then those nets and their nodes are read in with their locations in the grid
   unsigned numNets;
   infile>>textstring;
   expect(textstring, string("num"));
@@ -125,7 +127,7 @@ void SimpleGR::parseInput()
   infile>>numNets;
   grNetArr.reserve(numNets);
 
-  //FIXME: comment on the purpose of the for loop
+  //  The purpose of the for loop is to read in the number of nets (could be more than one)
   for (unsigned i = 0; i<numNets; ++i) {
     Net newNet;
     unsigned numPins;
@@ -153,7 +155,7 @@ void SimpleGR::parseInput()
     newNet.gCellTwo.y = static_cast<unsigned>(floor((pinY-minY)/gcellHeight));
     newNet.gCellTwo.z = layer-1;
 
-    // FIXME: comment on the if.else. logic
+    // Checks to make sure that the net is routable before adding it to the net map
     if (newNet.gCellOne!=newNet.gCellTwo) {
       ++routableNets;
 

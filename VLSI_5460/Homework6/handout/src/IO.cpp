@@ -189,7 +189,7 @@ void SimpleGR::parseInput()
     assert(layer2<=2);
 
     if (gridCol1==gridCol2) {
-      // FIXME: is it a vertical or horizantal edge?
+      // Is it a vertical or horizantal edge? - Horizontal
       assert(gridRow1==gridRow2+1||gridRow1+1==gridRow2);
       if (gcellArr3D[layer1-1][min(gridRow1, gridRow2)][gridCol1].incY==NULLID) {
         if (newCap!=0.) {
@@ -198,14 +198,14 @@ void SimpleGR::parseInput()
         }
       } else {
         grEdgeArr[gcellArr3D[layer1-1][min(gridRow1, gridRow2)][gridCol1].incY].capacity = newCap;
-        // FIXME: explain this if logic
+        // If the new capacity is zero, store that info into the incY and decY class info
         if (newCap==0.) {
           gcellArr3D[layer1-1][min(gridRow1, gridRow2)][gridCol1].incY = NULLID;
           gcellArr3D[layer1-1][max(gridRow1, gridRow2)][gridCol1].decY = NULLID;
         }
       }
     } else if (gridRow1==gridRow2) {
-      // FIXME: is it a vertical or horizantal edge?
+      // Is it a vertical or horizantal edge? - Vertical
       assert(gridCol1==gridCol2+1||gridCol1+1==gridCol2);
       if (gcellArr3D[layer1-1][gridRow1][min(gridCol1, gridCol2)].incX==NULLID) {
         if (newCap!=0.) {
@@ -214,7 +214,7 @@ void SimpleGR::parseInput()
         }
       } else {
         grEdgeArr[gcellArr3D[layer1-1][gridRow1][min(gridCol1, gridCol2)].incX].capacity = newCap;
-        // FIXME: explain this if logic (same as above)
+        // If the new capacity is zero, store that info into the incY and decY class info
         if (newCap==0.) {
           gcellArr3D[layer1-1][gridRow1][min(gridCol1, gridCol2)].incX = NULLID;
           gcellArr3D[layer1-1][gridRow1][max(gridCol1, gridCol2)].decX = NULLID;

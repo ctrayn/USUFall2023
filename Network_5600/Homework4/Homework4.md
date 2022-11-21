@@ -10,7 +10,7 @@ An upper-layer packet is split into 10 frames, each of which has an 80% chance o
 
 ---
 
-p  = 0.8 $^{10}$ = 0.1074
+p  = 0.8 <sup>10</sup> = 0.1074
 
 E = 1/p = <u>9.31 times</u>
 
@@ -143,19 +143,19 @@ A block of bits with *n* rows and *k* columns uses horizontal and vertical parit
 
 Probability of getting two errors in any particular row where `p` is the probability of error
 
-$$p * 1/n$$
+    p * 1/n
 
 To get four errors in one row (resulting in undetection)
 
-$$(p/n) * (p/n) * (p/n) * (p/n) = (p/n)^4$$
+    (p/n) * (p/n) * (p/n) * (p/n) = (p/n)^4
 
 Probability to get 2 errors in one row and two errors in another row
 
-$$(p/n)^2 + (p/n)^2 = 2(p/n)^2$$
+    (p/n)^2 + (p/n)^2 = 2(p/n)^2
 
 Combining these gives
 
-$$(p/n)^4 + 2(p/n)^2$$
+    (p/n)^4 + 2(p/n)^2
 
 ---
 ---
@@ -178,7 +178,7 @@ Suppose that a message 1001 1100 1010 0011 is transmitted using Internet Checksu
 
 # 3.17
 
-A bit stream 10011101 is transmitted using the standard CRC method described in the text. The generator polynomial is $x^3 + 1$. Show the actual bit string transmitted. Suppose that the third bit from the left is inverted during transmission. Show that this error is detected at the receiver's end. Give an example of bit errors in the bit string transmitted that will not be detected by the receiver.
+A bit stream 10011101 is transmitted using the standard CRC method described in the text. The generator polynomial is `x^3 + 1`. Show the actual bit string transmitted. Suppose that the third bit from the left is inverted during transmission. Show that this error is detected at the receiver's end. Give an example of bit errors in the bit string transmitted that will not be detected by the receiver.
 
 ---
 
@@ -249,34 +249,38 @@ Frame size of 160 would give exactly 50% efficiency. Anything more would give mo
 
 # 3.22
 
-A 3000-km-long T1 trunk is used to transmit 64-byte frames using protocol 5. If the propagation speed is 6 $\mu$ sec/km, how many bits should the sequence numbers be?
+A 3000-km-long T1 trunk is used to transmit 64-byte frames using protocol 5. If the propagation speed is 6 \mu sec/km, how many bits should the sequence numbers be?
 
 ---
 
-Max window size $= 1 + 2a$
+Max window size = 1 + 2a
 
 Bandwidth of T1 trunk = 1.544 Mbps
 
-Transmission Delay = Length of Frame/Bandwidth = $64*8/1.544*10^6 = 0.331ms$
+Transmission Delay = Length of Frame/Bandwidth = `64*8/1.544*10^6 = 0.331ms`
 
-Propogation delay = $6 * 3000 / 10^6= 18 ms$
+Propogation delay = `6 * 3000 / 10^6= 18 ms`
 
-a = $T_P/T_t = 18/0.331 = 54.3$
+a = `T_P/T_t = 18/0.331 = 54.3`
 
 N = 1 + 2a = 110
 
-$log_2110 = 7$
+`log_2(110) = 7`
 
 ---
 ---
 
 # 3.27
 
-The distance from the earth to a distant planet is approximately $9 \times 10^{10}$ m. What is the channel utilization if a stop-and-wait protocol is used for frame transmission on a 64 Mbps point-to-point link? Assume that the frame size is 32 KB and the speed of light is $3 \times 10^8$ m/s.
+The distance from the earth to a distant planet is approximately `9 x 10^10` m. What is the channel utilization if a stop-and-wait protocol is used for frame transmission on a 64 Mbps point-to-point link? Assume that the frame size is 32 KB and the speed of light is `3 x 10^8 m/s`.
 
 ---
 
-//TODO
+Transmission Delay = PacketSize / Datarate = 256 Kbits / 64 Mbps = 0.004 s
+
+Propogation Delay = Distance / Propagation Speed = 9×10^10 / 3×10^8 = 300 s
+
+Utilization = Transmission Delay / (Transmission Delay + Propogation Delay (roundtrip)) = 0.004 / (0.004 + 2*300) = 6.67e-6
 
 ---
 ---
@@ -287,7 +291,9 @@ In the previous problem, suppose a sliding window protocol is used instead. For 
 
 ---
 
-//TODO
+For full utilization, the window size should be the number of packets in one full round-trip propagation delay.
+
+600/0.004 = 150k window size
 
 ---
 ---

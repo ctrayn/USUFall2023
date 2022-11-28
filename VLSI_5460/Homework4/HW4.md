@@ -16,7 +16,7 @@ To run after compiling
 
 ## Notes
 
-After running it I got the output
+After running the starting input I got the output
 
     E0: 12V3V4V5V6V7V8V9VaVbVcVdVeVfVgViVjVkVlV
     Initial Cost: 287.521
@@ -44,3 +44,5 @@ Does make it take a little longer, but it results in a better chip ratio and a b
 
 The theoretical minimum score, calculated by summing all areas, is 195.15.
 Considering that this score is literally impossible, 265 is about 35% error, or about 26% dead space.
+
+The next initial states were similar

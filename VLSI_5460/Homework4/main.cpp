@@ -35,25 +35,40 @@ int main(int argc, char *argv[]) {
         nodes.push_back(node_t(id, stof(area), stof(aspect_ratio)));
     }
 
-    //Make the initial NPE
-    string E0 = nodes[0].id;
-    for (int i = 1; i < nodes.size(); i++) {
-        E0 += nodes[i].id;
-        E0 += "V";
+    /*
+    float cost3a = npe_cost("12V3V4V5V6V7V8V9VaVbVcVdVeVfVgViVjVkVlV", nodes);
+    // printf("**********************************************\n");
+    float cost3b = npe_cost("12H3H4H5H6H7H8H9HaHbHcHdHeHfHgHiHjHkHlH", nodes);
+    // printf("**********************************************\n");
+    float cost3c = npe_cost("213546H7VHVa8V9HcVHgHibdHkVHfeHVlHVjHVH", nodes);
+    */
+
+    string initials[] = {
+        "12V3V4V5V6V7V8V9VaVbVcVdVeVfVgViVjVkVlV",
+        "12H3H4H5H6H7H8H9HaHbHcHdHeHfHgHiHjHkHlH",
+        "213546H7VHVa8V9HcVHgHibdHkVHfeHVlHVjHVH",
+    };
+
+    string E0;
+    int initialization_size = 3;
+    for (int i = 0; i < initialization_size; i++) {
+
+        E0 = initials[i];
+
+        cout << "E0: " << E0 << endl;
+        cout << "Initial Cost: " << npe_cost(E0, nodes) << endl;
+
+        //Do the simulated annealing
+        string Ef = anneal(E0, nodes);
+        float NPE_ratio = npe_cost_ratio(Ef, nodes);
+
+        //Check for chip ratio error
+        if (((1/chipratio) <= NPE_ratio) || (NPE_ratio <= chipratio)) {
+            cout << "\033[31mError\033[0m: Chip ratio not valid : " << NPE_ratio << ", please adjust starting parameters and rerun" << endl;
+        }
+
+        cout << "Ef: " << Ef << endl;
+        cout << "Final Cost: " << npe_cost(Ef, nodes) << endl;
     }
-    cout << "E0: " << E0 << endl;
-    cout << "Initial Cost: " << npe_cost(E0, nodes) << endl;
-
-    //Do the simulated annealing
-    string Ef = anneal(E0, nodes);
-    float NPE_ratio = npe_cost_ratio(Ef, nodes);
-
-    //Check for chip ratio error
-    if (((1/chipratio) <= NPE_ratio) || (NPE_ratio <= chipratio)) {
-        cout << "\033[31mError\033[0m: Chip ratio not valid : " << NPE_ratio << ", please adjust starting parameters and rerun" << endl;
-    }
-
-    cout << "Ef: " << Ef << endl;
-    cout << "Final Cost: " << npe_cost(Ef, nodes) << endl;
     return 0;
 }

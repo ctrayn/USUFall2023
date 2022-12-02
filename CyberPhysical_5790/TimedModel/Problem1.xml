@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+clock x;
+clock y;
+bool MinorReady:=false;
+bool MinorGoing:=false;</declaration>
+	<template>
+		<name x="5" y="5">Lights</name>
+		<declaration>// Place local declarations here.</declaration>
+		<location id="id0" x="-161" y="-59">
+			<name x="-204" y="-93">MajorGreen</name>
+		</location>
+		<location id="id1" x="0" y="-59">
+			<name x="-42" y="-93">MajorYellow</name>
+			<label kind="invariant" x="-17" y="-110">x&lt;=1</label>
+		</location>
+		<location id="id2" x="178" y="-59">
+			<name x="144" y="-93">MajorRed</name>
+			<label kind="invariant" x="161" y="-110">x&lt;=1</label>
+		</location>
+		<location id="id3" x="178" y="76">
+			<name x="136" y="102">MinorGreen</name>
+			<label kind="invariant" x="153" y="119">x&lt;=5</label>
+		</location>
+		<location id="id4" x="0" y="76">
+			<name x="-34" y="102">MinorYellow</name>
+			<label kind="invariant" x="-8" y="119">x&lt;=1</label>
+		</location>
+		<location id="id5" x="-161" y="76">
+			<name x="-195" y="93">MinorRed</name>
+			<label kind="invariant" x="-178" y="110">x&lt;=1</label>
+		</location>
+		<init ref="id0"/>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-204" y="-17">x:=0</label>
+		</transition>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id5"/>
+			<label kind="assignment" x="-153" y="42">x:=0, MinorGoing:=false</label>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id4"/>
+			<label kind="assignment" x="68" y="51">x:=0</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id3"/>
+			<label kind="assignment" x="187" y="0">x:=0, MinorGoing:=true</label>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="assignment" x="59" y="-76">x:=0</label>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-153" y="-51">x&gt;=5 &amp;&amp; MinorReady</label>
+			<label kind="assignment" x="-110" y="-76">x:=0</label>
+		</transition>
+	</template>
+	<template>
+		<name>CarController</name>
+		<location id="id6" x="-255" y="-51">
+			<name x="-323" y="-102">NotWaiting</name>
+			<label kind="invariant" x="-314" y="-77">y&lt;=30</label>
+		</location>
+		<location id="id7" x="-17" y="-51">
+			<name x="-25" y="-85">CarWaiting</name>
+		</location>
+		<init ref="id6"/>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id6"/>
+			<nail x="-323" y="0"/>
+			<nail x="-323" y="-51"/>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id7"/>
+			<label kind="guard" x="76" y="-42">!MinorGoing</label>
+			<nail x="76" y="-50"/>
+			<nail x="76" y="-8"/>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id6"/>
+			<label kind="guard" x="-178" y="17">MinorGoing</label>
+			<label kind="assignment" x="-195" y="34">y:=0, MinorReady:=false</label>
+			<nail x="-110" y="8"/>
+			<nail x="-161" y="8"/>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id7"/>
+			<label kind="guard" x="-212" y="-127">!MinorReady &amp;&amp; y&gt;= 5</label>
+			<label kind="assignment" x="-195" y="-110">MinorReady:=true</label>
+			<nail x="-153" y="-93"/>
+			<nail x="-110" y="-93"/>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+
+// List one or more processes to be composed into a system.
+system Lights,CarController;
+    </system>
+	<queries>
+		<query>
+			<formula>A[] not deadlock</formula>
+			<comment></comment>
+		</query>
+	</queries>
+</nta>

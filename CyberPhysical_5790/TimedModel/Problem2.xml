@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+clock x;
+clock y;
+bool MinorReady:=false;
+bool MinorGoing:=false;</declaration>
+	<template>
+		<name x="5" y="5">Lights</name>
+		<declaration>// Place local declarations here.</declaration>
+		<location id="id0" x="-238" y="-170">
+			<name x="-315" y="-221">MajorGreen</name>
+		</location>
+		<location id="id1" x="34" y="-170">
+			<name x="-8" y="-204">MajorYellow</name>
+			<label kind="invariant" x="17" y="-221">x&lt;=5</label>
+		</location>
+		<location id="id2" x="306" y="-170">
+			<name x="272" y="-204">MajorRed</name>
+			<label kind="invariant" x="289" y="-221">x&lt;=5</label>
+		</location>
+		<location id="id3" x="306" y="102">
+			<name x="263" y="119">MinorGreen</name>
+			<label kind="invariant" x="280" y="136">x&lt;=30</label>
+		</location>
+		<location id="id4" x="34" y="102">
+			<name x="0" y="128">MinorYellow</name>
+			<label kind="invariant" x="26" y="145">x&lt;=5</label>
+		</location>
+		<location id="id5" x="-238" y="102">
+			<name x="-272" y="119">MinorRed</name>
+			<label kind="invariant" x="-255" y="136">x&lt;=5</label>
+		</location>
+		<location id="id6" x="170" y="68">
+			<name x="153" y="25">Delay4</name>
+			<label kind="invariant" x="153" y="42">x&lt;=1</label>
+		</location>
+		<location id="id7" x="-102" y="68">
+			<name x="-127" y="85">Delay5</name>
+			<label kind="invariant" x="-127" y="102">x&lt;=1</label>
+		</location>
+		<location id="id8" x="-204" y="-34">
+			<name x="-187" y="-51">Delay6</name>
+			<label kind="invariant" x="-187" y="-34">x&lt;=1</label>
+		</location>
+		<location id="id9" x="-102" y="-136">
+			<name x="-127" y="-119">Delay1</name>
+			<label kind="invariant" x="-127" y="-102">x&lt;=1</label>
+		</location>
+		<location id="id10" x="170" y="-136">
+			<name x="144" y="-119">Delay2</name>
+			<label kind="invariant" x="153" y="-102">x&lt;=1</label>
+		</location>
+		<location id="id11" x="272" y="-34">
+			<name x="289" y="-51">Delay3</name>
+			<label kind="invariant" x="289" y="-34">x&lt;=1</label>
+		</location>
+		<init ref="id0"/>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-212" y="-102">x&gt;=1</label>
+			<label kind="assignment" x="-212" y="-85">x:=0</label>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id5"/>
+			<label kind="guard" x="-195" y="51">x&gt;=1</label>
+			<label kind="assignment" x="-195" y="68">x:=0</label>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id4"/>
+			<label kind="guard" x="85" y="42">x&gt;=1</label>
+			<label kind="assignment" x="85" y="59">x:=0</label>
+		</transition>
+		<transition>
+			<source ref="id11"/>
+			<target ref="id3"/>
+			<label kind="guard" x="297" y="17">x&gt;=1</label>
+			<label kind="assignment" x="297" y="34">x:=0,
+MinorGoing:=true</label>
+		</transition>
+		<transition>
+			<source ref="id10"/>
+			<target ref="id2"/>
+			<label kind="guard" x="212" y="-187">x&gt;=1</label>
+			<label kind="assignment" x="212" y="-170">x:=0</label>
+		</transition>
+		<transition>
+			<source ref="id9"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-59" y="-187">x&gt;=1</label>
+			<label kind="assignment" x="-59" y="-170">x:=0</label>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id8"/>
+			<label kind="guard" x="-263" y="8">x&gt;=5</label>
+			<label kind="assignment" x="-263" y="25">x:=0</label>
+		</transition>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id7"/>
+			<label kind="guard" x="-76" y="17">x&gt;=5</label>
+			<label kind="assignment" x="-76" y="34">x:=0, 
+MinorGoing:=false</label>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id6"/>
+			<label kind="guard" x="221" y="51">x&gt;=30</label>
+			<label kind="assignment" x="229" y="68">x:=0</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id11"/>
+			<label kind="guard" x="306" y="-127">x&gt;=5</label>
+			<label kind="assignment" x="306" y="-110">x:=0</label>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id10"/>
+			<label kind="guard" x="102" y="-187">x&gt;=5</label>
+			<label kind="assignment" x="102" y="-170">x:=0</label>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id9"/>
+			<label kind="guard" x="-195" y="-204">x&gt;=30 &amp;&amp; 
+MinorReady</label>
+			<label kind="assignment" x="-170" y="-170">x:=0</label>
+		</transition>
+	</template>
+	<template>
+		<name>CarController</name>
+		<location id="id12" x="-255" y="-51">
+			<name x="-323" y="-102">NotWaiting</name>
+			<label kind="invariant" x="-314" y="-77">y&lt;=30</label>
+		</location>
+		<location id="id13" x="-17" y="-51">
+			<name x="-25" y="-85">CarWaiting</name>
+		</location>
+		<init ref="id12"/>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id12"/>
+			<nail x="-323" y="0"/>
+			<nail x="-323" y="-51"/>
+		</transition>
+		<transition>
+			<source ref="id13"/>
+			<target ref="id13"/>
+			<label kind="guard" x="76" y="-42">!MinorGoing</label>
+			<nail x="76" y="-50"/>
+			<nail x="76" y="-8"/>
+		</transition>
+		<transition>
+			<source ref="id13"/>
+			<target ref="id12"/>
+			<label kind="guard" x="-178" y="17">MinorGoing</label>
+			<label kind="assignment" x="-195" y="34">y:=0, MinorReady:=false</label>
+			<nail x="-110" y="8"/>
+			<nail x="-161" y="8"/>
+		</transition>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id13"/>
+			<label kind="guard" x="-212" y="-127">!MinorReady &amp;&amp; y&gt;= 5</label>
+			<label kind="assignment" x="-195" y="-110">MinorReady:=true</label>
+			<nail x="-153" y="-93"/>
+			<nail x="-110" y="-93"/>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+
+// List one or more processes to be composed into a system.
+system Lights,CarController;
+    </system>
+	<queries>
+		<query>
+			<formula>A[] not deadlock</formula>
+			<comment></comment>
+		</query>
+	</queries>
+</nta>

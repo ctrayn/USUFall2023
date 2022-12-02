@@ -11,6 +11,7 @@
 #include <cassert>
 #include <stdint.h>
 #include <cstring>
+#include <stdio.h>
 
 typedef uint16_t CoordType;
 typedef uint32_t IdType;
@@ -334,6 +335,7 @@ private:
   }
   inline Point gcellIdtoCoord(const IdType id) const
   {
+    // printf("ID %d NumLayers %d GCellArrSizeX %d, GCellArrSzY %d\n", id, numLayers, gcellArrSzX, gcellArrSzY);
     assert(id<numLayers*gcellArrSzX*gcellArrSzY);
     return Point(id%gcellArrSzX, (id/gcellArrSzX)%gcellArrSzY, id/(gcellArrSzX*gcellArrSzY));
   }

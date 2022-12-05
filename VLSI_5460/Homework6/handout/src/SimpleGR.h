@@ -367,6 +367,11 @@ private:
 
   // !!! More function declarations should go here
   // !!!function declare
+  IdType gCelltoId(const GCell cell) {
+    return gcellCoordToId(cell.x, cell.y, cell.z);
+  }
+
+  Edge* gCellstoEdge(const GCell alpha, const GCell beta);
 
 public:
 

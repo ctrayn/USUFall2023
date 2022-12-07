@@ -1,3 +1,12 @@
-[submodule "CyberPhysical_5790/Final/CodeBase/ivy"]
-	path = CyberPhysical_5790/Final/CodeBase/ivy
-	url = git@github.com:microsoft/ivy.git
+[submodule "CyberPhysical_5790/Final/code/ivy"]
+	path = CyberPhysical_5790/Final/code/ivy
+	url = git@github.com:kenmcmil/ivy.git
+[submodule "CyberPhysical_5790/Final/code/picotls"]
+	path = CyberPhysical_5790/Final/code/picotls
+	url = git@github.com:h2o/picotls.git
+[submodule "CyberPhysical_5790/Final/code/picoquic"]
+	path = CyberPhysical_5790/Final/code/picoquic
+	url = git@github.com:private-octopus/picoquic.git
+[submodule "CyberPhysical_5790/Final/code/quant"]
+	path = CyberPhysical_5790/Final/code/quant
+	url = git@github.com:NTAP/quant.git

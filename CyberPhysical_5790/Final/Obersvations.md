@@ -6,6 +6,12 @@ ECE 6790
 
 # Final Project Observations
 
-1. There are files ivy/test/frag*.ivy that are mostly the same, the first 20ish lines are identical and then there are different endings to the files
+## Installing Ivy Updates
 
-2. There are different client/server releationships defined in ivy/test/client_server_mc*.ivy
+[https://kenmcmil.github.io/ivy/install.html](https://kenmcmil.github.io/ivy/install.html)
+
+Ken McMillan provided a simple python based installation guide. The only problem is that it's not completely up to date. Specifically in the git clone line, change the GitHub location to 
+
+    $ git clone --recurse-submodules https://github.com/kenmcmil/ivy.git
+
+Also, I would suggest building a python virtual environment, because the python 2.7 requirement is not up to date, and a lot of people probably already have python 3.10+ installed.

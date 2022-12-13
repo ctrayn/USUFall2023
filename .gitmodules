@@ -10,3 +10,6 @@
 [submodule "CyberPhysical_5790/Final/code/quant"]
 	path = CyberPhysical_5790/Final/code/quant
 	url = git@github.com:NTAP/quant.git
+[submodule "CyberPhysical_5790/Final/code/kenmcmilpico/picoquic"]
+	path = CyberPhysical_5790/Final/code/kenmcmilpico/picoquic
+	url = git@github.com:kenmcmil/picoquic.git

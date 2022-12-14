@@ -192,16 +192,16 @@ object rx_cmd = {
     action on = {
         if mode = false {
             mode := true;
-            call rx_cmd_bpsk.on;
-            call rx_cmd_pcm_psk_pm.on;
-            call rx_cmd_qpsk.on;
+            call rx.on;
         }
     }
 
     action off = {
         if mode = true {
             mode := false;
-            call rx.off;
+            call rx_cmd_bpsk.off;
+            call rx_cmd_pcm_psk_pm.off;
+            call rx_cmd_qpsk.off;
         }
     }
 }
@@ -223,7 +223,7 @@ object rx_cmd_pcm_psk_pm = {
     action off = {
         if mode = true {
             mode := false;
-            call rx_cmd.off;
+            # No children nodes
         }
     }
 }
@@ -238,14 +238,14 @@ object rx_cmd_bpsk = {
     action on = {
         if mode = false {
             mode := true;
-            # No children nodes
+            call rx_cmd.on;
         }
     }
 
     action off = {
         if mode = true {
             mode := false;
-            call rx_cmd.off;
+            # No children nodes
         }
     }
 }
@@ -260,14 +260,14 @@ object rx_cmd_qpsk = {
     action on = {
         if mode = false {
             mode := true;
-            # No children nodes
+            call rx_cmd.on;
         }
     }
 
     action off = {
         if mode = true {
             mode := false;
-            call rx_cmd.off;
+            # No children nodes
         }
     }
 }

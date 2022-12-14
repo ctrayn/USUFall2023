@@ -1,0 +1,371 @@
+#lang ivy1.7
+
+attribute method = mc
+
+object tx = {
+    individual mode : bool
+
+    after init {
+        mode := false;
+    }
+
+    action on = {
+        if mode = false {
+            mode := true;
+            # No parent nodes
+        }
+    }
+
+    action off = {
+        if mode = true {
+            mode := false;
+            call tx_tlm.off;
+        }        
+    }
+}
+
+object tx_tlm = {
+    individual mode : bool
+
+    after init {
+        mode := false;
+    }
+
+    action on = {
+        if mode = false {
+            mode := true;
+            call tx.on;
+        }
+    }
+
+    action off = {
+        if mode = true {
+            mode := false;
+            call tx_tlm_bpsk.off;
+            call tx_tlm_gmsk.off;
+            call tx_tlm_pcm_pm.off;
+            call tx_tlm_pcm_psk_pm.off;
+            call tx_tlm_qpsk.off;
+        }
+    }
+}
+
+object tx_tlm_bpsk = {
+    individual mode : bool
+
+    after init {
+        mode := false;
+    }
+
+    action on = {
+        if mode = false {
+            mode := true;
+            call tx_tlm.on;
+        }
+    }
+
+    action off = {
+        if mode = true {
+            mode := false;
+            # No children nodes
+        }
+    }
+}
+
+object tx_tlm_qpsk = {
+    individual mode : bool
+
+    after init {
+        mode := false;
+    }
+
+    action on = {
+        if mode = false {
+            mode := true;
+            call tx_tlm.on;
+        }
+    }
+
+    action off = {
+        if mode = true {
+            mode := false;
+            # No children nodes
+        }
+    }
+}
+
+object tx_tlm_gmsk = {
+    individual mode : bool
+
+    after init {
+        mode := false;
+    }
+
+    action on = {
+        if mode = false {
+            mode := true;
+            call tx_tlm.on;
+        }
+    }
+
+    action off = {
+        if mode = true {
+            mode := false;
+            # No children nodes
+        }
+    }
+}
+
+object tx_tlm_pcm_psk_pm = {
+    individual mode : bool
+
+    after init {
+        mode := false;
+    }
+
+    action on = {
+        if mode = false {
+            mode := true;
+            call tx_tlm.on;
+        }
+    }
+
+    action off = {
+        if mode = true {
+            mode := false;
+            # No children
+        }
+    }
+}
+
+object tx_tlm_pcm_pm = {
+    individual mode : bool
+
+    after init {
+        mode := false;
+    }
+
+    action on = {
+        if mode = false {
+            mode := true;
+            call tx_tlm.on;
+        }
+    }
+
+    action off = {
+        if mode = true {
+            mode := false;
+            # No children nodes
+        }
+    }
+}
+
+object rx = {
+    individual mode : bool
+
+    after init {
+        mode := false;
+    }
+
+    action on = {
+        if mode = false {
+            mode := true;
+            # No parent nodes
+        }
+    }
+
+    action off = {
+        if mode = true {
+            mode := false;
+            call rx_cmd.off;
+        }
+    }
+}
+
+object rx_cmd = {
+    individual mode : bool
+
+    after init {
+        mode := false;
+    }
+
+    action on = {
+        if mode = false {
+            mode := true;
+            call rx_cmd_bpsk.on;
+            call rx_cmd_pcm_psk_pm.on;
+            call rx_cmd_qpsk.on;
+        }
+    }
+
+    action off = {
+        if mode = true {
+            mode := false;
+            call rx.off;
+        }
+    }
+}
+
+object rx_cmd_pcm_psk_pm = {
+    individual mode : bool
+
+    after init {
+        mode := false;
+    }
+
+    action on = {
+        if mode = false {
+            mode := true;
+            call rx_cmd.on;
+        }
+    }
+
+    action off = {
+        if mode = true {
+            mode := false;
+            call rx_cmd.off;
+        }
+    }
+}
+
+object rx_cmd_bpsk = {
+    individual mode : bool
+
+    after init {
+        mode := false;
+    }
+
+    action on = {
+        if mode = false {
+            mode := true;
+            # No children nodes
+        }
+    }
+
+    action off = {
+        if mode = true {
+            mode := false;
+            call rx_cmd.off;
+        }
+    }
+}
+
+object rx_cmd_qpsk = {
+    individual mode : bool
+
+    after init {
+        mode := false;
+    }
+
+    action on = {
+        if mode = false {
+            mode := true;
+            # No children nodes
+        }
+    }
+
+    action off = {
+        if mode = true {
+            mode := false;
+            call rx_cmd.off;
+        }
+    }
+}
+
+object ranging = {
+    individual mode : bool
+
+    after init {
+        mode := false;
+    }
+
+    action on = {
+        if mode = false {
+            mode := true;
+            # No parent nodes
+        }
+    }
+
+    action off = {
+        if mode = true {
+            mode := false;
+            call ranging_turnaround.off;
+        }
+    }
+}
+
+object ranging_turnaround = {
+    individual mode : bool
+
+    after init {
+        mode := false
+    }
+
+    action on = {
+        if mode = false {
+            mode := true;
+            call ranging.on;
+        }
+    }
+
+    action off = {
+        if mode = true {
+            mode := false;
+            # No children nodes
+        }
+    }
+}
+
+
+export tx.on
+export tx.off
+export tx_tlm.on
+export tx_tlm.off
+export tx_tlm_bpsk.on
+export tx_tlm_bpsk.off
+export tx_tlm_qpsk.on
+export tx_tlm_qpsk.off
+export tx_tlm_gmsk.on
+export tx_tlm_gmsk.off
+export tx_tlm_pcm_psk_pm.on
+export tx_tlm_pcm_psk_pm.off
+export tx_tlm_pcm_pm.on
+export tx_tlm_pcm_pm.off
+export rx.on
+export rx.off
+export rx_cmd.on
+export rx_cmd.off
+export rx_cmd_bpsk.on
+export rx_cmd_bpsk.off
+export rx_cmd_qpsk.on
+export rx_cmd_qpsk.off
+export rx_cmd_pcm_psk_pm.on
+export rx_cmd_pcm_psk_pm.off
+
+# Some nodes can't be enabled while other nodes are enabled
+invariant ~(tx_tlm.mode = true & ranging.mode = true)
+invariant ~(tx_tlm_bpsk.mode = true & tx_tlm_gmsk.mode = true)
+invariant ~(tx_tlm_bpsk.mode = true & tx_tlm_gmsk.mode = true)
+invariant ~(tx_tlm_bpsk.mode = true & tx_tlm_pcm_pm.mode = true)
+invariant ~(tx_tlm_bpsk.mode = true & tx_tlm_pcm_psk_pm.mode = true)
+invariant ~(tx_tlm_bpsk.mode = true & tx_tlm_qpsk.mode = true)
+invariant ~(tx_tlm_gmsk.mode = true & tx_tlm_pcm_pm.mode = true)
+invariant ~(tx_tlm_gmsk.mode = true & tx_tlm_pcm_psk_pm.mode = true)
+invariant ~(tx_tlm_gmsk.mode = true & tx_tlm_qpsk.mode = true)
+invariant ~(tx_tlm_pcm_pm.mode = true & tx_tlm_pcm_psk_pm.mode = true)
+invariant ~(tx_tlm_pcm_pm.mode = true & tx_tlm_qpsk.mode = true)
+invariant ~(tx_tlm_pcm_psk_pm.mode = true & tx_tlm_qpsk.mode = true)
+invariant ~(rx_cmd_bpsk.mode = true & rx_cmd_pcm_psk_pm.mode = true)
+invariant ~(rx_cmd_bpsk.mode = true & rx_cmd_qpsk.mode = true)
+invariant ~(rx_cmd_pcm_psk_pm.mode = true & rx_cmd_qpsk.mode = true)
+# Can't enable a child node without having the parent node enabled
+invariant ~(tx.mode = false & tx_tlm.mode = true)
+invariant ~(tx_tlm.mode = false & tx_tlm_bpsk.mode = true)
+invariant ~(tx_tlm.mode = false & tx_tlm_gmsk.mode = true)
+invariant ~(tx_tlm.mode = false & tx_tlm_pcm_pm.mode = true)
+invariant ~(tx_tlm.mode = false & tx_tlm_pcm_psk_pm.mode = true)
+invariant ~(tx_tlm.mode = false & tx_tlm_qpsk.mode = true)
+invariant ~(rx.mode = false & rx_cmd.mode = true)
+invariant ~(rx_cmd.mode = false & rx_cmd_bpsk.mode = true)
+invariant ~(rx_cmd.mode = false & rx_cmd_pcm_psk_pm.mode = true)
+invariant ~(rx_cmd.mode = false & rx_cmd_qpsk.mode = true)

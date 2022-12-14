@@ -18,8 +18,8 @@ object tx = {
 
     action off = {
         if mode = true {
-            mode := false;
             call tx_tlm.off;
+            mode := false;
         }        
     }
 }
@@ -33,19 +33,20 @@ object tx_tlm = {
 
     action on = {
         if mode = false {
-            mode := true;
+            call ranging.off;
             call tx.on;
+            mode := true;
         }
     }
 
     action off = {
         if mode = true {
-            mode := false;
             call tx_tlm_bpsk.off;
             call tx_tlm_gmsk.off;
             call tx_tlm_pcm_pm.off;
             call tx_tlm_pcm_psk_pm.off;
             call tx_tlm_qpsk.off;
+            mode := false;
         }
     }
 }
@@ -59,8 +60,12 @@ object tx_tlm_bpsk = {
 
     action on = {
         if mode = false {
-            mode := true;
+            call tx_tlm_gmsk.off;
+            call tx_tlm_pcm_pm.off;
+            call tx_tlm_pcm_psk_pm.off;
+            call tx_tlm_qpsk.off;
             call tx_tlm.on;
+            mode := true;
         }
     }
 
@@ -81,8 +86,12 @@ object tx_tlm_qpsk = {
 
     action on = {
         if mode = false {
-            mode := true;
+            call tx_tlm_bpsk.off;
+            call tx_tlm_gmsk.off;
+            call tx_tlm_pcm_pm.off;
+            call tx_tlm_pcm_psk_pm.off;
             call tx_tlm.on;
+            mode := true;
         }
     }
 
@@ -103,8 +112,12 @@ object tx_tlm_gmsk = {
 
     action on = {
         if mode = false {
-            mode := true;
+            call tx_tlm_bpsk.off;
+            call tx_tlm_pcm_pm.off;
+            call tx_tlm_pcm_psk_pm.off;
+            call tx_tlm_qpsk.off;
             call tx_tlm.on;
+            mode := true;
         }
     }
 
@@ -125,8 +138,12 @@ object tx_tlm_pcm_psk_pm = {
 
     action on = {
         if mode = false {
-            mode := true;
+            call tx_tlm_bpsk.off;
+            call tx_tlm_gmsk.off;
+            call tx_tlm_pcm_pm.off;
+            call tx_tlm_qpsk.off;
             call tx_tlm.on;
+            mode := true;
         }
     }
 
@@ -147,8 +164,12 @@ object tx_tlm_pcm_pm = {
 
     action on = {
         if mode = false {
-            mode := true;
+            call tx_tlm_bpsk.off;
+            call tx_tlm_gmsk.off;
+            call tx_tlm_pcm_psk_pm.off;
+            call tx_tlm_qpsk.off;
             call tx_tlm.on;
+            mode := true;
         }
     }
 
@@ -176,8 +197,8 @@ object rx = {
 
     action off = {
         if mode = true {
-            mode := false;
             call rx_cmd.off;
+            mode := false;
         }
     }
 }
@@ -191,17 +212,17 @@ object rx_cmd = {
 
     action on = {
         if mode = false {
-            mode := true;
             call rx.on;
+            mode := true;
         }
     }
 
     action off = {
         if mode = true {
-            mode := false;
             call rx_cmd_bpsk.off;
             call rx_cmd_pcm_psk_pm.off;
             call rx_cmd_qpsk.off;
+            mode := false;
         }
     }
 }
@@ -215,8 +236,8 @@ object rx_cmd_pcm_psk_pm = {
 
     action on = {
         if mode = false {
-            mode := true;
             call rx_cmd.on;
+            mode := true;
         }
     }
 
@@ -237,8 +258,10 @@ object rx_cmd_bpsk = {
 
     action on = {
         if mode = false {
-            mode := true;
+            call rx_cmd_pcm_psk_pm.off;
+            call rx_cmd_qpsk.off;
             call rx_cmd.on;
+            mode := true;
         }
     }
 
@@ -259,8 +282,10 @@ object rx_cmd_qpsk = {
 
     action on = {
         if mode = false {
-            mode := true;
+            call rx_cmd_bpsk.off;
+            call rx_cmd_pcm_psk_pm.off;
             call rx_cmd.on;
+            mode := true;
         }
     }
 
@@ -281,15 +306,15 @@ object ranging = {
 
     action on = {
         if mode = false {
-            mode := true;
             # No parent nodes
+            mode := true;
         }
     }
 
     action off = {
         if mode = true {
-            mode := false;
             call ranging_turnaround.off;
+            mode := false;
         }
     }
 }
@@ -303,8 +328,9 @@ object ranging_turnaround = {
 
     action on = {
         if mode = false {
-            mode := true;
+            call tx_tlm.off;
             call ranging.on;
+            mode := true;
         }
     }
 

@@ -236,6 +236,8 @@ object rx_cmd_pcm_psk_pm = {
 
     action on = {
         if mode = false {
+            call rx_cmd_bpsk.off;
+            call rx_cmd_qpsk.off;
             call rx_cmd.on;
             mode := true;
         }

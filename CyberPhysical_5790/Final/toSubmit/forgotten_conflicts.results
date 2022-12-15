@@ -1,0 +1,180 @@
+
+Isolate this:
+[
+    rx_cmd_qpsk.mode = false
+    ranging.mode = false
+    rx_cmd_pcm_psk_pm.mode = false
+    tx_tlm_pcm_psk_pm.mode = false
+    tx_tlm_bpsk.mode = false
+    tx.mode = false
+    rx.mode = false
+    tx_tlm_pcm_pm.mode = false
+    rx_cmd.mode = false
+    tx_tlm_gmsk.mode = false
+    ranging_turnaround.mode = false
+    tx_tlm_qpsk.mode = false
+    tx_tlm.mode = false
+    rx_cmd_bpsk.mode = false
+]
+genie.ivy: line 9:
+tx.mode := false
+
+genie.ivy: line 31:
+tx_tlm.mode := false
+
+genie.ivy: line 58:
+tx_tlm_bpsk.mode := false
+
+genie.ivy: line 84:
+tx_tlm_qpsk.mode := false
+
+genie.ivy: line 110:
+tx_tlm_gmsk.mode = false
+
+genie.ivy: line 136:
+tx_tlm_pcm_psk_pm.mode := false
+
+genie.ivy: line 162:
+tx_tlm_pcm_pm.mode := false
+
+genie.ivy: line 188:
+rx.mode := false
+
+genie.ivy: line 210:
+rx_cmd.mode := false
+
+genie.ivy: line 234:
+rx_cmd_pcm_psk_pm.mode := false
+
+genie.ivy: line 258:
+rx_cmd_bpsk.mode := false
+
+genie.ivy: line 282:
+rx_cmd_qpsk.mode := false
+
+genie.ivy: line 306:
+ranging.mode := false
+
+genie.ivy: line 328:
+ranging_turnaround.mode := false
+
+call ext:rx_cmd_bpsk.on
+
+{
+genie.ivy: line 263:
+    call rx_cmd_pcm_psk_pm.off
+    {
+genie.ivy: line 264:
+        call rx_cmd_qpsk.off
+        {
+genie.ivy: line 265:
+            call rx_cmd.on
+            {
+genie.ivy: line 215:
+                call rx.on
+                {
+genie.ivy: line 193:
+                    rx.mode := true
+
+                    [
+                        rx.mode = true
+                    ]
+genie.ivy: line 216:
+                    rx_cmd.mode := true
+
+                    [
+                        rx_cmd.mode = true
+                    ]
+genie.ivy: line 266:
+                    rx_cmd_bpsk.mode := true
+
+                    [
+                        rx_cmd_bpsk.mode = true
+                    ]
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
+call ext:tx_tlm.on
+
+{
+genie.ivy: line 36:
+    call ranging.off
+    {
+genie.ivy: line 37:
+        call tx.on
+        {
+genie.ivy: line 14:
+            tx.mode := true
+
+            [
+                tx.mode = true
+            ]
+genie.ivy: line 38:
+            tx_tlm.mode = true
+
+            [
+                tx_tlm.mode = true
+            ]
+        }
+
+    }
+
+}
+
+call ext:rx_cmd_qpsk.on
+
+{
+genie.ivy: line 287:
+    call rx_cmd_bpsk.off
+    {
+genie.ivy: line 272:
+        rx_cmd_bpsk.mode := false
+
+        [
+            rx_cmd_bpsk.mode = false
+        ]
+genie.ivy: line 288:
+        call rx_cmd_pcm_psk_pm.off
+        {
+genie.ivy: line 289:
+            call rx_cmd.on
+            {
+genie.ivy: line 290:
+                rx_cmd_qpsk.mode := true
+
+                [
+                    rx_cmd_qpsk.mode = true
+                ]
+            }
+
+        }
+
+    }
+
+}
+
+call ext:rx_cmd_pcm_psk_pm.on
+
+{
+genie.ivy: line 241:
+    call rx_cmd.on
+    {
+genie.ivy: line 242:
+        rx_cmd_pcm_psk_pm.mode := true
+
+        [
+            rx_cmd_pcm_psk_pm.mode = true
+        ]
+    }
+
+}
+
+
+FAIL

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+ <head>
+  <title>Index of /courses/5420/labs/amplifiers/spice</title>
+ </head>
+ <body>
+<h1>Index of /courses/5420/labs/amplifiers/spice</h1>
+  <table>
+   <tr><th valign="top"><img src="/icons/blank.gif" alt="[ICO]"></th><th><a href="?C=N;O=A">Name</a></th><th><a href="?C=M;O=A">Last modified</a></th><th><a href="?C=S;O=A">Size</a></th><th><a href="?C=D;O=A">Description</a></th></tr>
+   <tr><th colspan="5"><hr></th></tr>
+<tr><td valign="top"><img src="/icons/back.gif" alt="[PARENTDIR]"></td><td><a href="/courses/5420/labs/amplifiers/">Parent Directory</a>       </td><td>&nbsp;</td><td align="right">  - </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="unity_gain.dwf3work">unity_gain.dwf3work</a>    </td><td align="right">2020-12-02 15:58  </td><td align="right">1.0M</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="slewing.dwf3work">slewing.dwf3work</a>       </td><td align="right">2020-12-02 15:58  </td><td align="right">612K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="inverting_configuration.dwf3work">inverting_configurat..&gt;</a></td><td align="right">2020-12-02 15:58  </td><td align="right">351K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="open_loop.dwf3work">open_loop.dwf3work</a>     </td><td align="right">2020-12-02 15:58  </td><td align="right">236K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="plot_measurements.m">plot_measurements.m</a>    </td><td align="right">2020-11-16 14:14  </td><td align="right">2.9K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="ex2.sp">ex2.sp</a>                 </td><td align="right">2020-11-16 14:14  </td><td align="right">2.6K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/text.gif" alt="[TXT]"></td><td><a href="ex10.sp">ex10.sp</a>                </td><td align="right">2020-11-16 11:35  </td><td align="right">2.1K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="OTA.sp">OTA.sp</a>                 </td><td align="right">2020-11-16 14:14  </td><td align="right">1.2K</td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="ex3.sp">ex3.sp</a>                 </td><td align="right">2020-11-16 14:14  </td><td align="right">918 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="ex5.sp">ex5.sp</a>                 </td><td align="right">2020-11-16 11:35  </td><td align="right">908 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="ex11.sp">ex11.sp</a>                </td><td align="right">2020-11-16 11:35  </td><td align="right">883 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="plot_tran.m">plot_tran.m</a>            </td><td align="right">2020-11-16 14:14  </td><td align="right">625 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="plot_ac.m">plot_ac.m</a>              </td><td align="right">2020-11-16 14:14  </td><td align="right">435 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="solution_calculate_predictions.m">solution_calculate_p..&gt;</a></td><td align="right">2020-11-16 14:14  </td><td align="right">378 </td><td>&nbsp;</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="calculate_predictions.m">calculate_predictions.m</a></td><td align="right">2020-11-16 14:14  </td><td align="right">333 </td><td>&nbsp;</td></tr>
+   <tr><th colspan="5"><hr></th></tr>
+</table>
+</body></html>
